@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -15,10 +15,10 @@
         <GroupBox Header="Add New Transaction" Grid.Row="0" Padding="10" Margin="0,0,0,10">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="190"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel Grid.Column="0" Margin="0,0,10,0">
@@ -62,6 +62,47 @@
                         <ComboBoxItem Content="Other"/>
                     </ComboBox>
                 </StackPanel>
+            </Grid>
+        </GroupBox>
+        
+        <Button x:Name="btnAdd" Content="Add Transaction" Grid.Row="0" 
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                Width="120" Height="25" Margin="0,0,0,-10" 
+                Click="BtnAdd_Click"/>
+        
+        <GroupBox Header="Transactions" Grid.Row="1" Padding="10" Margin="0,0,0,10">
+            <DataGrid x:Name="dgTransactions" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True" 
+                      GridLinesVisibility="All" 
+                      AlternatingRowBackground="DarkGray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:MM/dd/yyyy}'}" Width="120"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
+                    <DataGridTextColumn Header="Currency" Binding="{Binding Currency}" Width="70"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        
+        <GroupBox Header="Category Breakdown" Grid.Row="2" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock Text="Group By: " FontWeight="Bold" Margin="0,0,0,5"/>
+                    <RadioButton x:Name="rbCategory" Content="Category" IsChecked="True"
+                                 Margin="0,0,0,5"/>
+                    <RadioButton x:Name="rbDate" Content="Date (Month)"/>
+                    
+                    <Button Content="Refresh Chart" Click="UpdateChart" Margin="0,20,0,0" Padding="10,5"/>
+                </StackPanel>
+                
+                <Canvas x:Name="chartCanvas" Grid.Column="1" Background="AliceBlue"/>
             </Grid>
         </GroupBox>
     </Grid>
