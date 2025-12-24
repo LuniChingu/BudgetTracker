@@ -1,6 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -11,17 +15,18 @@ namespace BudgetTracker;
 /// </summary>
 public partial class MainWindow
 {
-    private ObservableCollection<Transaction> _transactions;
+    //private ObservableCollection<Transaction> _transactions;
 
     public MainWindow()
     {
         InitializeComponent();
-        _transactions = new ObservableCollection<Transaction>();
-        dgTransactions.ItemsSource = _transactions;
-        dpDate.SelectedDate = DateTime.Today;
+        this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+        //_transactions = new ObservableCollection<Transaction>();
+        //dgTransactions.ItemsSource = _transactions;
+        //dpDate.SelectedDate = DateTime.Today;
     }
 
-    private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    /*private void BtnAdd_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtName.Text))
         {
@@ -62,6 +67,22 @@ public partial class MainWindow
         cmbCurrency.SelectedIndex = 0;
 
         UpdateChart(null, null);
+    }
+
+    private void OnRightClick(object sender, MouseButtonEventArgs e)
+    {
+        if (sender is DataGridRow row)
+        {
+            row.IsSelected = true;
+        }
+    }
+
+    private void OnDeleteTransaction(object sender, RoutedEventArgs e)
+    {
+        if (dgTransactions.SelectedItem is Transaction selectedRow)
+        {
+            _transactions.Remove(selectedRow);
+        }
     }
 
     private void UpdateChart(object sender, RoutedEventArgs e)
@@ -195,5 +216,5 @@ public partial class MainWindow
         public decimal Amount { get; set; }
         public string? Category { get; set; }
         public string? Currency { get; set; }
-    }
+    }*/
 }
