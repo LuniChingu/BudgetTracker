@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         Title="MainWindow" Height="600" Width="920">
+    
     <Border Background="LavenderBlush"
             CornerRadius="20">
         <Grid ShowGridLines="True">
@@ -31,130 +33,39 @@
                     
                     <StackPanel x:Name="pnlControlBar" Grid.Row="0"
                                 Orientation="Horizontal" FlowDirection="RightToLeft"
-                                Margin="0,0,5,0">
-                        <Button x:Name="btnClose" Style="{StaticResource UpperBarBtn}">
-                            <sharp:IconImage Icon="Xmark" Style="{StaticResource BarButtonIcon}"/>
+                                Margin="0,0,5,0"
+                                Background="Transparent"
+                                MouseDown="UpperBar_MouseDown">
+                        <Button x:Name="btnClose" 
+                                Style="{StaticResource UpperBarBtn}"
+                                Click="btnClose_Click">
+                            <sharp:IconImage Icon="Xmark"
+                                             Foreground="AliceBlue"
+                                             Style="{StaticResource BarButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMinimize" 
+                                Style="{StaticResource UpperBarBtn}"
+                                Click="btnClose_Click">
+                            <sharp:IconImage Icon="WindowMinimize"
+                                             Foreground="AliceBlue"
+                                             IconFont="Solid"
+                                             Width="12"
+                                             Style="{StaticResource BarButtonIcon}"/>
                         </Button>
                     </StackPanel>
+                    
+                    <!--Content Section / Child Views-->
+                    <ContentControl Content=""
+                                    Grid.Row="2"
+                                    Margin="25"/>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
                 </Grid>
             </Border>    
         </Grid>
-        
     </Border>
-    <!--<Grid ShowGridLines="True" Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="300" />
-        </Grid.RowDefinitions>
-        
-        <GroupBox Header="Add New Transaction" Grid.Row="0" Padding="10" Margin="0,0,0,10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="170"/>
-                    <ColumnDefinition Width="190"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="150"/>
-                </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                    <TextBlock Text="Name: " FontWeight="Bold"/>
-                    <TextBox x:Name="txtName" Height="25" Margin="0,5,0,0"/>
-                </StackPanel>
-                
-                <StackPanel Grid.Column="1" Margin="0,0,10,0">
-                    <TextBlock Text="Date: " FontWeight="Bold"/>
-                    <DatePicker x:Name="dpDate" Height="25" Margin="0,5,0,0"/>
-                </StackPanel>
-                
-                <StackPanel Grid.Column="2" Margin="0,0,10,0">
-                    <TextBlock Text="Amount: " FontWeight="Bold"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBox x:Name="txtAmount" Grid.Column="0" Height="25" Margin="0,5,0,0"/>
-                        <ComboBox Grid.Column="1" x:Name="cmbCurrency" Height="25" Width="70" Margin="5,5,0,0">
-                            <ComboBoxItem Content="NIS" IsSelected="True"/>
-                            <ComboBoxItem Content="USD"/>
-                            <ComboBoxItem Content="EUR"/>
-                            <ComboBoxItem Content="GBP"/>
-                            <ComboBoxItem Content="JPY"/>
-                        </ComboBox>
-                    </Grid>
-                </StackPanel>
-                
-                <StackPanel Grid.Column="3">
-                    <TextBlock Text="Category: " FontWeight="Bold"/>
-                    <ComboBox x:Name="cmbCategory" Height="25" Margin="0,5,0,0">
-                        <ComboBoxItem Content="Bills" IsSelected="True"/>
-                        <ComboBoxItem Content="Transport"/>
-                        <ComboBoxItem Content="Entertainment"/>
-                        <ComboBoxItem Content="Health"/>
-                        <ComboBoxItem Content="Shopping"/>
-                        <ComboBoxItem Content="Food"/>
-                        <ComboBoxItem Content="Other"/>
-                    </ComboBox>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-        
-        <Button x:Name="btnAdd" Content="Add Transaction" Grid.Row="0" 
-                VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                Width="120" Height="25" Margin="0,0,0,-10" 
-                Click="BtnAdd_Click"/>
-        
-        <GroupBox Header="Transactions" Grid.Row="1" Padding="10" Margin="0,0,0,10">
-            <DataGrid x:Name="dgTransactions" 
-                      AutoGenerateColumns="False" 
-                      IsReadOnly="True" 
-                      GridLinesVisibility="All" 
-                      AlternatingRowBackground="DarkGray"
-                      ItemsSource="{Binding}">
-                
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="PreviewMouseRightButtonDown" Handler="OnRightClick"/>
-                        <Setter Property="ContextMenu">
-                            <Setter.Value>
-                                <ContextMenu x:Name="RowContextMenu">
-                                    <MenuItem Header="Delete" Click="OnDeleteTransaction"/>
-                                </ContextMenu>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.RowStyle>
-                
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:MM/dd/yyyy}'}" Width="120"/>
-                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
-                    <DataGridTextColumn Header="Currency" Binding="{Binding Currency}" Width="70"/>
-                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
-        
-        <GroupBox Header="Category Breakdown" Grid.Row="2" Padding="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                    <TextBlock Text="Group By: " FontWeight="Bold" Margin="0,0,0,5"/>
-                    <RadioButton x:Name="rbCategory" Content="Category" IsChecked="True"
-                                 Margin="0,0,0,5" Checked="UpdateChart"/>
-                    <RadioButton x:Name="rbDate" Content="Date (Month)" Checked="UpdateChart"/>
-                    
-                    <Button Content="Refresh Chart" Click="UpdateChart" Margin="0,20,0,0" Padding="10,5"/>
-                </StackPanel>
-                
-                <Canvas x:Name="chartCanvas" Grid.Column="1" Background="AliceBlue"/>
-            </Grid>
-        </GroupBox>
-    </Grid>-->
 </Window>

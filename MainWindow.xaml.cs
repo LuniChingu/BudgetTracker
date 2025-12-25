@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 
 namespace BudgetTracker;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow
 {
     //private ObservableCollection<Transaction> _transactions;
@@ -25,7 +21,14 @@ public partial class MainWindow
         //dgTransactions.ItemsSource = _transactions;
         //dpDate.SelectedDate = DateTime.Today;
     }
-
+    private void UpperBar_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed) DragMove();
+    }
+    private void btnClose_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
     /*private void BtnAdd_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -69,152 +72,192 @@ public partial class MainWindow
         UpdateChart(null, null);
     }
 
-    private void OnRightClick(object sender, MouseButtonEventArgs e)
-    {
-        if (sender is DataGridRow row)
-        {
-            row.IsSelected = true;
-        }
-    }
-
-    private void OnDeleteTransaction(object sender, RoutedEventArgs e)
-    {
-        if (dgTransactions.SelectedItem is Transaction selectedRow)
-        {
-            _transactions.Remove(selectedRow);
-        }
-    }
-
     private void UpdateChart(object sender, RoutedEventArgs e)
     {
-        chartCanvas.Children.Clear();
         if (_transactions.Count == 0)
         {
-            TextBlock noDataText = new TextBlock
-            {
-                Text = "No data to display. Add some transactions!",
-                FontSize = 16,
-                Foreground = Brushes.Gray
-            };
-            Canvas.SetLeft(noDataText, 20);
-            Canvas.SetTop(noDataText, 20);
-            chartCanvas.Children.Add(noDataText);
+            // Clear all charts if no data
+            pieChart.Series = Array.Empty<ISeries>();
+            barChart.Series = Array.Empty<ISeries>();
+            lineChart.Series = Array.Empty<ISeries>();
             return;
         }
 
-        Dictionary<string, decimal> groupedData;
-
-        if (rbCategory.IsChecked == true)
+        // Decide which chart to show
+        if (rbPieChart.IsChecked == true)
         {
-            groupedData = _transactions.
-                GroupBy(t => t.Category)
-                .ToDictionary(
-                    g => g.Key,
-                    g => g.Sum(t => t.Amount)
-                );
+            ShowPieChart();
         }
-        else
+        else if (rbBarChart.IsChecked == true)
         {
-            groupedData = _transactions.
-                GroupBy(t => t.Date.ToString("MMM yyyy"))
-                .ToDictionary(
-                    g => g.Key, 
-                    g => g.Sum(t => t.Amount)
-                );
+            ShowBarChart();
         }
-
-        decimal total = groupedData.Values.Sum();
-
-        var colors = new Brush[]
+        else if (rbLineChart.IsChecked == true)
         {
-            Brushes.LightBlue, Brushes.LightGreen, Brushes.LightCoral,
-            Brushes.LightGoldenrodYellow, Brushes.LightPink, Brushes.LightSalmon
-        };
-
-        var centerX = chartCanvas.ActualWidth > 0 ? chartCanvas.ActualWidth / 2 : 300;
-        var centerY = chartCanvas.ActualWidth > 0 ? chartCanvas.ActualHeight / 2 : 125;
-        var radius = Math.Min(centerX, centerY) - 50;
-        
-        if (radius <= 0) radius = 100;
-
-        double startAngle = -90;
-        var colorIndex = 0;
-
-        foreach (var item in groupedData)
-        {
-            var percentage = (item.Value / total) * 100;
-            var angle = (double)(percentage / 100 * 360);
-
-            DrawPieSlice(centerX, centerY, radius, startAngle, angle, colors[colorIndex % colors.Length], item.Key,
-                percentage);
-
-            startAngle += angle;
-            colorIndex++;
+            ShowLineChart();
         }
     }
 
-    private void DrawPieSlice(double centerX, double centerY, double radius,
-        double startAngle, double angle, Brush color, string label, decimal percentage)
-    {
-        Path path = new Path
+    private void ShowPieChart()
         {
-            Fill = color,
-            Stroke = Brushes.White,
-            StrokeThickness = 2
-        };
+            // Show pie chart, hide others
+            pieChart.Visibility = Visibility.Visible;
+            barChart.Visibility = Visibility.Collapsed;
+            lineChart.Visibility = Visibility.Collapsed;
 
-        PathGeometry geometry = new PathGeometry();
-        PathFigure figure = new PathFigure()
+            // Get grouped data
+            Dictionary<string, decimal> groupedData = GetGroupedData();
+
+            // Convert data to PieSeries format
+            // This is the KEY part - instead of binding, we directly create the series
+            var series = new List<ISeries>();
+            
+            foreach (var item in groupedData)
+            {
+                series.Add(new PieSeries<decimal>
+                {
+                    Values = [item.Value],  // The amount
+                    Name = item.Key,                // The category/month name
+                    DataLabelsPaint = new SolidColorPaint(SKColors.White),
+                    DataLabelsSize = 14,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter = point => $"{item.Key}\n${point.Coordinate.PrimaryValue:F2}"
+                });
+            }
+
+            // Directly set the Series property - NO BINDING NEEDED!
+            pieChart.Series = series;
+        }
+
+        private void ShowBarChart()
         {
-            StartPoint = new Point(centerX, centerY),
-            IsClosed = true
-        };
+            // Show bar chart, hide others
+            pieChart.Visibility = Visibility.Collapsed;
+            barChart.Visibility = Visibility.Visible;
+            lineChart.Visibility = Visibility.Collapsed;
 
-        double endAngle = startAngle + angle;
+            // Get grouped data
+            Dictionary<string, decimal> groupedData = GetGroupedData();
 
-        double x1 = centerX + radius * Math.Cos(startAngle * Math.PI / 180);
-        double y1 = centerY + radius * Math.Sin(startAngle * Math.PI / 180);
+            // Create bar series
+            var columnSeries = new ColumnSeries<decimal>
+            {
+                Values = groupedData.Values.ToArray(),  // The amounts
+                Name = "Amount",
+                Fill = new SolidColorPaint(SKColors.DodgerBlue),
+                DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                DataLabelsSize = 12,
+                DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
+                DataLabelsFormatter = point => $"${point.Coordinate.PrimaryValue:F2}"
+            };
 
-        double x2 = centerX + radius * Math.Cos(endAngle * Math.PI / 180);
-        double y2 = centerY + radius * Math.Sin(endAngle * Math.PI / 180);
+            // Set X-axis labels (categories/months)
+            barChart.XAxes = new[]
+            {
+                new Axis
+                {
+                    Labels = groupedData.Keys.ToArray(),  // Category names
+                    LabelsRotation = 15
+                }
+            };
 
-        figure.Segments.Add(new LineSegment(new Point(x1, y1), true));
-        figure.Segments.Add(new ArcSegment
+            // Set Y-axis
+            barChart.YAxes = new[]
+            {
+                new Axis
+                {
+                    Name = "Amount ($)",
+                    NamePaint = new SolidColorPaint(SKColors.Black)
+                }
+            };
+
+            // Directly set the Series - NO BINDING!
+            barChart.Series = new ISeries[] { columnSeries };
+        }
+
+        private void ShowLineChart()
         {
-            Point = new Point(x2, y2),
-            Size = new Size(radius, radius),
-            SweepDirection = SweepDirection.Clockwise,
-            IsLargeArc = angle > 180
-        });
+            // Show line chart, hide others
+            pieChart.Visibility = Visibility.Collapsed;
+            barChart.Visibility = Visibility.Collapsed;
+            lineChart.Visibility = Visibility.Visible;
 
-        geometry.Figures.Add(figure);
-        path.Data = geometry;
-        chartCanvas.Children.Add(path);
+            // For line chart, we need data by date (sorted)
+            var sortedByDate = _transactions
+                .OrderBy(t => t.Date)
+                .GroupBy(t => t.Date.ToString("MMM yyyy"))
+                .Select(g => new
+                {
+                    Month = g.Key,
+                    Total = g.Sum(t => t.Amount)
+                })
+                .ToList();
 
-        double labelAngle = startAngle + angle / 2;
-        double labelRadius = radius * 0.7;
+            // Create line series
+            var lineSeries = new LineSeries<decimal>
+            {
+                Values = sortedByDate.Select(x => x.Total).ToArray(),
+                Name = "Spending Over Time",
+                Fill = null,  // No fill under line
+                Stroke = new SolidColorPaint(SKColors.Green) { StrokeThickness = 3 },
+                GeometrySize = 10,  // Point size
+                GeometryStroke = new SolidColorPaint(SKColors.DarkGreen) { StrokeThickness = 3 },
+                DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                DataLabelsSize = 11,
+                DataLabelsFormatter = point => $"${point.Coordinate.PrimaryValue:F2}"
+            };
 
-        double labelX = centerX + labelRadius * Math.Cos(labelAngle * Math.PI / 180);
-        double labelY = centerY + labelRadius * Math.Sin(labelAngle * Math.PI / 180);
+            // Set X-axis with month labels
+            lineChart.XAxes = new[]
+            {
+                new Axis
+                {
+                    Labels = sortedByDate.Select(x => x.Month).ToArray(),
+                    LabelsRotation = 15
+                }
+            };
 
-        TextBlock text = new TextBlock
+            // Set Y-axis
+            lineChart.YAxes = new[]
+            {
+                new Axis
+                {
+                    Name = "Amount ($)",
+                    NamePaint = new SolidColorPaint(SKColors.Black)
+                }
+            };
+
+            // Directly set the Series - NO BINDING!
+            lineChart.Series = new ISeries[] { lineSeries };
+        }
+
+        // Helper method to get grouped data based on selected option
+        private Dictionary<string, decimal> GetGroupedData()
         {
-            Text = $"{label}\n{percentage:F1}%",
-            TextAlignment = TextAlignment.Center,
-            Foreground = Brushes.Black
-        };
-
-        Canvas.SetLeft(text, labelX - 30);
-        Canvas.SetTop(text, labelY - 15);
-        chartCanvas.Children.Add(text);
-    }
+            if (rbCategory.IsChecked == true)
+            {
+                // Group by category
+                return _transactions
+                    .GroupBy(t => t.Category)
+                    .ToDictionary(g => g.Key, g => g.Sum(t => t.Amount));
+            }
+            else
+            {
+                // Group by month
+                return _transactions
+                    .GroupBy(t => t.Date.ToString("MMM yyyy"))
+                    .ToDictionary(g => g.Key, g => g.Sum(t => t.Amount));
+            }
+        }
+    
 
     public class Transaction
     {
         public string Name { get; set; } = string.Empty;
         public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
+        public decimal Amount { get; set; } = (decimal)0.0d;
         public string? Category { get; set; }
         public string? Currency { get; set; }
     }*/
+    
 }

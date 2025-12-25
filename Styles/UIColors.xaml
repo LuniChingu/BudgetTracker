@@ -3,7 +3,7 @@
                     xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
     <!--Control Panel button-->
     <Style x:Key="UpperBarBtn" TargetType="Button">
-        <Setter Property="Width" Value="35"/>
+        <Setter Property="Width" Value="25"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
@@ -19,8 +19,7 @@
         
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightCyan"/>
-                <Setter Property="Foreground" Value="DarkGray"/>
+                <Setter Property="Background" Value="CornflowerBlue"/>
             </Trigger>
         </Style.Triggers>
     </Style>
