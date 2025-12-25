@@ -11,20 +11,25 @@
         Background="Transparent"
         Title="MainWindow" Height="600" Width="920">
     
-    <Border Background="LavenderBlush"
+    <Border Background="#1f1f24"
             CornerRadius="20">
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" CornerRadius="10,0,0,10">
-                
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.6">
+                        <GradientStop Color="#1f1f24" Offset="0"/>
+                        <GradientStop Color="#141414" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
             </Border>
             
             <!--Main Section-->
-            <Border Grid.Column="1" Background="DarkSlateBlue" CornerRadius="0,10,10,0">
-                <Grid ShowGridLines="True">
+            <Border Grid.Column="1" CornerRadius="0,10,10,0">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="35"/>
@@ -54,13 +59,33 @@
                         </Button>
                     </StackPanel>
                     
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Overview" 
+                                   FontSize="22"
+                                   Foreground="White" 
+                                   Margin="10,5,0,0"
+                                   VerticalAlignment="Bottom"
+                                   FontWeight="Black"
+                                   FontFamily="OldSansBlack"/>
+                        <TextBlock Grid.Column="1" Text="Checking Account:"
+                                   Margin="10,5,0,0"
+                                   FontSize="16"
+                                   Foreground="AliceBlue"
+                                   VerticalAlignment="Bottom"
+                                   FontFamily="OldSansBlack"/>
+                    </Grid>
+                    
                     <!--Content Section / Child Views-->
                     <ContentControl Content=""
                                     Grid.Row="2"
                                     Margin="25"/>
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" ShowGridLines="True">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="250"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                     </Grid>
