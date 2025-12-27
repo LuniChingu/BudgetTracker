@@ -12,6 +12,20 @@ namespace BudgetTracker;
 public partial class MainWindow
 {
     //private ObservableCollection<Transaction> _transactions;
+    
+    //Budget Objects
+    private decimal incomeGoal;
+    private decimal needsGoal;
+    private decimal wantsGoal;
+    private decimal savingsGoal;
+    private decimal totalGoal;
+    
+    private decimal incomePlan;
+    private decimal needsPlan;
+    private decimal wantsPlan;
+    private decimal savingsPlan;
+    private decimal totalPlan;
+    
 
     public MainWindow()
     {
@@ -29,6 +43,64 @@ public partial class MainWindow
     {
         this.Close();
     }
+
+    private void TxtIncomeGoal_LostFocus(object sender, RoutedEventArgs e)
+    {
+        var textBox = (TextBox)sender;
+
+        if (decimal.TryParse(textBox.Text, out var newIncome))
+        {
+            incomeGoal = newIncome;
+            needsGoal = incomeGoal * 0.5m;
+            wantsGoal = incomeGoal * 0.3m;
+            savingsGoal = incomeGoal * 0.2m;
+            
+            totalGoal = needsGoal + wantsGoal + savingsGoal;
+            UpdateGoals();
+        }
+        else
+        {
+            MessageBox.Show("Income goal must be a number");
+            textBox.Text = incomeGoal.ToString("F2");
+        }
+    }
+
+    private void UpdateGoals()
+    {
+        txtIncomeGoal.Text = $"{incomeGoal:F2}";
+        txtNeedsGoal.Text = $"{needsGoal:F2}";
+        txtWantsGoal.Text = $"{wantsGoal:F2}";
+        txtSavingsGoal.Text = $"{savingsGoal:F2}";
+        txtTotalGoal.Text = $"{totalGoal:F2}";
+    }
+    
+    private void SavePlanBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtNeedsTotalPlan.Text) && string.IsNullOrWhiteSpace(txtWantsTotalPlan.Text) && string.IsNullOrWhiteSpace(txtSavingsTotalPlan.Text))
+        {
+            MessageBox.Show("Enter a number");
+            return;
+        }
+        
+        needsPlan = decimal.Parse(txtNeedsTotalPlan.Text);
+        wantsPlan = decimal.Parse(txtWantsTotalPlan.Text);
+        savingsPlan = decimal.Parse(txtSavingsTotalPlan.Text);
+        
+        totalPlan = needsPlan + wantsPlan + savingsPlan;
+        
+        UpdatePlannedBudget();
+        
+    }
+
+    private void UpdatePlannedBudget()
+    {
+        txtNeedsPlan.Text = $"{needsPlan:F2}";
+        txtWantsPlan.Text = $"{wantsPlan:F2}";
+        txtSavingsPlan.Text = $"{savingsPlan:F2}";
+        txtTotalPlan.Text = $"{totalPlan:F2}";
+        
+    }
+    
     /*private void BtnAdd_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -198,7 +270,7 @@ public partial class MainWindow
             {
                 Values = sortedByDate.Select(x => x.Total).ToArray(),
                 Name = "Spending Over Time",
-                Fill = null,  // No fill under line
+                Fill = null,  // No fill underline
                 Stroke = new SolidColorPaint(SKColors.Green) { StrokeThickness = 3 },
                 GeometrySize = 10,  // Point size
                 GeometryStroke = new SolidColorPaint(SKColors.DarkGreen) { StrokeThickness = 3 },
@@ -259,5 +331,4 @@ public partial class MainWindow
         public string? Category { get; set; }
         public string? Currency { get; set; }
     }*/
-    
 }
