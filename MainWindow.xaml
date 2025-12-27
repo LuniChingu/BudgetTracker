@@ -14,7 +14,6 @@
     <Border Background="#1f1f24"
             CornerRadius="20">
         
-        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -104,16 +103,20 @@
                         
                         <!--Planned Spending form-->
                         <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <TextBlock Text="Planned Expenses" FontSize="16" Foreground="white" Margin="5,2,2,2"/>
-                            <TextBlock Text="Needs total" Foreground="white" Margin="5,2,5,2"/>
+                            <TextBlock Text="Planned Expenses" FontSize="16"
+                                       Foreground="white" Margin="5,2,2,2"/>
+                            <TextBlock Text="Needs total" Foreground="white"
+                                       Margin="5,2,5,2"/>
                             <TextBox x:Name="txtNeedsTotalPlan" 
                                      Text="0.00"
                                      Margin="5,2,30,2"/>
-                            <TextBlock Text="Wants total" Foreground="white" Margin="5,2,5,2"/>
+                            <TextBlock Text="Wants total" Foreground="white"
+                                       Margin="5,2,5,2"/>
                             <TextBox x:Name="txtWantsTotalPlan"
                                      Text="0.00"
                                      Margin="5,2,30,2"/>
-                            <TextBlock Text="Savings total" Foreground="white" Margin="5,2,5,2"/>
+                            <TextBlock Text="Savings total" Foreground="white"
+                                       Margin="5,2,5,2"/>
                             <TextBox x:Name="txtSavingsTotalPlan"
                                      Text="0.00"
                                      Margin="5,2,30,2"/>
@@ -180,7 +183,8 @@
                             <!--Income Row-->
                             <Border Grid.Row="1" Grid.Column="0" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,0,1,0">
-                                <TextBlock Text="Goal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Goal" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="1" Grid.Column="1" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,0,1,0">
@@ -211,7 +215,8 @@
                             <!--Needs Row-->
                             <Border Grid.Row="2" Grid.Column="0" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="Needs" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Needs" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="2" Grid.Column="1" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -228,17 +233,20 @@
                             </Border>
                             <Border Grid.Row="2" Grid.Column="3" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="calculated" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="calculated" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="2" Grid.Column="4" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="%%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="%%" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             
                             <!--Wants Row-->
                             <Border Grid.Row="3" Grid.Column="0" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="Wants" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Wants" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="3" Grid.Column="1" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -250,21 +258,25 @@
                             <Border Grid.Row="3" Grid.Column="2" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
                                 <TextBlock x:Name="txtWantsPlan"
-                                           Text="0.00" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                           Text="0.00" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="3" Grid.Column="3" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="calculated" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="calculated" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="3" Grid.Column="4" Background="#c2becf" 
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="%%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="%%" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             
                             <!--Savings Row-->
                             <Border Grid.Row="4" Grid.Column="0" Background="#c2becf"
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock Text="Savings" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Savings" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="4" Grid.Column="1" Background="#c2becf"
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -275,8 +287,7 @@
                             </Border>
                             <Border Grid.Row="4" Grid.Column="2" Background="#c2becf"
                                     BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                <TextBlock x:Name="txtSavingsPlan"
-                                           Text="0.00" 
+                                <TextBlock x:Name="txtSavingsPlan" Text="0.00" 
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="4" Grid.Column="3" Background="#c2becf"
@@ -292,32 +303,39 @@
                             
                             <!--Total Row-->
                             <Border Grid.Row="5" Grid.Column="0" Background="#9b8fb0" 
-                                    BorderBrush="DarkSlateBlue" BorderThickness="0,2,0,0"
+                                    BorderBrush="DarkSlateBlue"
+                                    BorderThickness="0,2,0,0"
                                     CornerRadius="0,0,0,5">
                                 <TextBlock Text="Total" 
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="5" Grid.Column="1" Background="#9b8fb0" 
-                                    BorderBrush="DarkSlateBlue" BorderThickness="0,2,0,0">
+                                    BorderBrush="DarkSlateBlue"
+                                    BorderThickness="0,2,0,0">
                                 <TextBlock x:Name="txtTotalGoal"
                                            Text="0.00"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="5" Grid.Column="2" Background="#9b8fb0" 
-                                    BorderBrush="DarkSlateBlue" BorderThickness="0,2,0,0">
+                                    BorderBrush="DarkSlateBlue"
+                                    BorderThickness="0,2,0,0">
                                 <TextBlock Text="0.00"
                                            x:Name="txtTotalPlan"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="5" Grid.Column="3" Background="#9b8fb0" 
-                                    BorderBrush="DarkSlateBlue" BorderThickness="0,2,0,0">
+                                    BorderBrush="DarkSlateBlue"
+                                    BorderThickness="0,2,0,0">
                                 <TextBlock Text="N+W+S"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border Grid.Row="5" Grid.Column="4" Background="#9b8fb0" 
-                                    BorderBrush="DarkSlateBlue" BorderThickness="0,2,0,0"
+                                    BorderBrush="DarkSlateBlue"
+                                    BorderThickness="0,2,0,0"
                                     CornerRadius="0,0,5,0">
                                 <TextBlock Text="N+W+S"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
