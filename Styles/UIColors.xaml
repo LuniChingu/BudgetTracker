@@ -54,7 +54,7 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="border" Property="Background" Value="CornflowerBlue"/>
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Foreground" Value="AliceBlue"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Trigger>
                         
@@ -124,6 +124,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <!--Transactions DataGrid Style-->
+    <Style x:Key="TransactionsStyle" TargetType="DataGrid">
+        
     </Style>
     
 </ResourceDictionary>

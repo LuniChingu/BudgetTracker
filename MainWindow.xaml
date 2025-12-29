@@ -62,16 +62,34 @@
                 <StackPanel>
                     <RadioButton x:Name="btnDashboard"
                                  Style="{StaticResource SideMenuRadioButton}"
-                                 Margin="10" 
-                                 Content="Dashboard" 
-                                 Foreground="AliceBlue"
+                                 Margin="5,10,5,5" 
                                  IsChecked="True"
-                                 Checked="rbDashboard_Checked"/>
-                    <RadioButton Margin="10" 
+                                 FontFamily="Resources/Fonts/#Lexend"
+                                 Checked="rbDashboard_Checked">
+                        <StackPanel Orientation="Horizontal">
+                            <sharp:IconImage Icon="House"
+                                             Foreground="AliceBlue"
+                                             Width="22"
+                                             Height="22"
+                                             Margin="0,0,10,0"
+                                             Style="{StaticResource BarButtonIcon}"/>
+                            <TextBlock VerticalAlignment="Center"> Dashboard</TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Margin="5,5,5,5" 
                                  Style="{StaticResource SideMenuRadioButton}"
-                                 Content="Transactions"
-                                 Checked="rbTransactions_Checked"
-                                 Foreground="AliceBlue"/>
+                                 FontFamily="Resources/Fonts/#Lexend"
+                                 Checked="rbTransactions_Checked">
+                        <StackPanel Orientation="Horizontal">
+                            <sharp:IconImage Icon="MoneyBillTransfer"
+                                             Foreground="AliceBlue"
+                                             Width="22"
+                                             Height="22"
+                                             Margin="0,0,10,0"
+                                             Style="{StaticResource BarButtonIcon}"/>
+                            <TextBlock VerticalAlignment="Center"> Transactions</TextBlock>
+                        </StackPanel>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             
@@ -94,14 +112,14 @@
                                    Foreground="White" 
                                    Margin="10,5,0,0"
                                    VerticalAlignment="Bottom"
-                                   FontWeight="Black"
-                                   FontFamily="OldSansBlack"/>
+                                   FontWeight="Bold"
+                                   FontFamily="Resources/Fonts/#Lexend"/>
                         <TextBlock Grid.Column="1" Text="Checking Account:"
                                    Margin="10,5,0,0"
                                    FontSize="16"
                                    Foreground="AliceBlue"
                                    VerticalAlignment="Bottom"
-                                   FontFamily="OldSansBlack"/>
+                                   FontFamily="Resources/Fonts/#Lexend"/>
                     </Grid>
                     
                     <!--Content Section / Child Views-->
@@ -120,7 +138,8 @@
                             <!--Planned Spending form-->
                             <StackPanel Orientation="Vertical" Grid.Column="1">
                                 <TextBlock Text="Planned Expenses" FontSize="16"
-                                        Foreground="white" Margin="5,2,2,2"/>
+                                        Foreground="white" Margin="5,2,2,2"
+                                        FontFamily="Resources/Fonts/#Lexend" FontWeight="Light"/>
                                 <TextBlock Text="Needs total" Foreground="white"
                                         Margin="5,2,5,2"/>
                                 <TextBox x:Name="txtNeedsTotalPlan" 
@@ -138,7 +157,9 @@
                                         Margin="5,2,30,2"/>
                             
                                 <Button x:Name="SavePlanBtn" Content="Update" 
-                                        Width="60" Margin="5,2,5,2"
+                                        Width="60" Margin="5,5,5,2"
+                                        Style="{StaticResource GenericBtn}"
+                                        FontFamily="Resources/Fonts/#Lexend"
                                         Click="SavePlanBtn_Click"/>
                             </StackPanel>
                         
@@ -165,9 +186,10 @@
                                 <!--Header Row Titles-->
                                 <Border Grid.Row="0" Grid.Column="0" Background="DarkSlateBlue" 
                                         CornerRadius="5,0,0,0">
-                                    <TextBlock Text="Category" 
+                                    <TextBlock Text="CATEGORY" 
                                            HorizontalAlignment="Center" 
                                            VerticalAlignment="Center"
+                                           FontFamily="Resources/Fonts/#Lexend"
                                            Foreground="AliceBlue"/>
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="1" Background="DarkSlateBlue" >
@@ -199,8 +221,8 @@
                                 <!--Income Row-->
                                 <Border Grid.Row="1" Grid.Column="0" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Goal" HorizontalAlignment="Center" 
-                                           VerticalAlignment="Center"/>
+                                    <TextBlock Text="GOAL" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" FontFamily="Resources/Fonts/#Lexend"/>
                                 </Border>
                                 <Border Grid.Row="1" Grid.Column="1" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,0,1,0">
@@ -231,8 +253,8 @@
                                 <!--Needs Row-->
                                 <Border Grid.Row="2" Grid.Column="0" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="Needs" HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                    <TextBlock Text="NEEDS" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" FontFamily="Resources/Fonts/#Lexend"/>
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="1" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -262,8 +284,8 @@
                                 <!--Wants Row-->
                                 <Border Grid.Row="3" Grid.Column="0" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="Wants" HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                    <TextBlock Text="WANTS" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" FontFamily="Resources/Fonts/#Lexend"/>
                                 </Border>
                                 <Border Grid.Row="3" Grid.Column="1" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -293,8 +315,8 @@
                                 <!--Savings Row-->
                                 <Border Grid.Row="4" Grid.Column="0" Background="#c2becf"
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="Savings" HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                    <TextBlock Text="SAVINGS" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" FontFamily="Resources/Fonts/#Lexend"/>
                                 </Border>
                                 <Border Grid.Row="4" Grid.Column="1" Background="#c2becf"
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -325,9 +347,10 @@
                                         BorderBrush="DarkSlateBlue"
                                         BorderThickness="0,2,0,0"
                                         CornerRadius="0,0,0,5">
-                                    <TextBlock Text="Total" 
+                                    <TextBlock Text="TOTAL" 
                                            HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center"
+                                           FontFamily="Resources/Fonts/#Lexend"/>
                                 </Border>
                                 <Border Grid.Row="5" Grid.Column="1" Background="#9b8fb0" 
                                         BorderBrush="DarkSlateBlue"
@@ -399,7 +422,7 @@
                                     
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
                                         <Button x:Name="BtnAddClick" Content="Add Transaction" Padding="5" 
-                                                Style="{StaticResource GenericBtn}"
+                                                Style="{StaticResource GenericBtn}" FontFamily="Resources/Fonts/#Lexend"
                                                 Click="BtnAdd_Click"/>
                                     </StackPanel>
                                 </Grid>
@@ -410,7 +433,7 @@
                                       Style="{StaticResource GenericGroupBox}">
                                 <DataGrid x:Name="dgTransactions"
                                           AutoGenerateColumns="False"
-                                          GridLinesVisibility="All">
+                                          GridLinesVisibility="Vertical">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                                         <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:dd/mm/yyyy}'}" Width="120"/>
