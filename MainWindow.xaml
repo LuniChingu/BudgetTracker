@@ -129,7 +129,7 @@
                     <Grid Grid.Row="1">
                         
                         <!--Dashboard view-->
-                        <Grid x:Name="dashboardView" Visibility="Visible">
+                        <Grid x:Name="dashboardView" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="360"/>
                             <ColumnDefinition/>
@@ -387,7 +387,7 @@
                         </Grid>
                         
                         <!--Transactions view-->
-                        <Grid x:Name="transactionsView" Visibility="Collapsed">
+                        <Grid x:Name="transactionsView" Visibility="Visible">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -404,14 +404,16 @@
                                     </Grid.RowDefinitions>
                                     
                                     <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                        <TextBlock Text="Transaction Name: "/>
+                                        <TextBlock Text="Transaction Name: " VerticalAlignment="Center"/>
                                         <TextBox x:Name="txtName" Text="Add name" Margin="5,0,5,0" Height="25" Width="100"/>
-                                        <TextBlock Text="Date: "/>
+                                        <TextBlock Text="Date: " VerticalAlignment="Center"/>
                                         <DatePicker x:Name="dpDate" Margin="5,0,5,0" Width="110"/>
-                                        <TextBlock Text="Amount: "/>
+                                        <TextBlock Text="Amount: " VerticalAlignment="Center"/>
                                         <TextBox x:Name="txtAmount" Text="0.00" Margin="5,0,5,0" Width="100"/>
-                                        <TextBlock Text="Category: "/>
-                                        <ComboBox x:Name="cmbCategory" Margin="5,0,5,0" Width="100">
+                                        <TextBlock Text="Category: " VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="cmbCategory" 
+                                                  Style="{StaticResource RoundedComboBoxStyle}"
+                                                  Margin="5,0,5,0" Width="100">
                                             <ComboBoxItem Content="Bills" IsSelected="True"/>
                                             <ComboBoxItem Content="Transport"/>
                                             <ComboBoxItem Content="Food"/>
@@ -429,16 +431,20 @@
                             </GroupBox>
                             <GroupBox Header="Transactions" Grid.Row="1"
                                       Margin="10"
-                                      Foreground="AliceBlue" 
+                                      Foreground="AliceBlue"
+                                      FontFamily="Resources/Fonts/#Lexend"
                                       Style="{StaticResource GenericGroupBox}">
                                 <DataGrid x:Name="dgTransactions"
                                           AutoGenerateColumns="False"
-                                          GridLinesVisibility="Vertical">
+                                          GridLinesVisibility="Horizontal"
+                                          Style="{DynamicResource TransactionsStyle}"
+                                          FontFamily="Resources/Fonts/#Lexend"
+                                          CanUserAddRows="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                                        <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:dd/mm/yyyy}'}" Width="120"/>
-                                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
-                                        <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120"/>
+                                        <DataGridTextColumn Header="NAME" Binding="{Binding Name}" Width="*"/>
+                                        <DataGridTextColumn Header="DATE" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
+                                        <DataGridTextColumn Header="AMOUNT" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
+                                        <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="120"/>
                                     </DataGrid.Columns>
                                     
                                 </DataGrid>

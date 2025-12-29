@@ -10,8 +10,8 @@ using System.Windows.Input;
 //TODO: add calculating percentages of the actuals. (category / income = %%)
 //TODO: add color coding based on percentages
 //TODO: add fields to fill in planned income and actual income
-//TODO: make the 'plans' form in a seperate window/popup and a bit more intricate (like it is in my excel)
-//TODO: make adding a transaction also a seperate window or popup + add ability to edit and delete rows from the datagrid
+//TODO: make the 'plans' form in a separate window/popup and a bit more intricate (like it is in my excel)
+//TODO: make adding a transaction also a separate window or popup + add ability to edit and delete rows from the datagrid
 //TODO: add an ability to pick a month to see in the dashboard (default is current month) + add ability to save the month's view into some sort of document?
 
 namespace BudgetTracker;

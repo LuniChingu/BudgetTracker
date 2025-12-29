@@ -116,19 +116,87 @@
     </Style>
     
     <!--ComboBox style-->
-    <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+    <Style x:Key="ComboBoxToggleStyle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="templateRoot"
+                            Background="LightSlateGray"
+                            CornerRadius="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <sharp:IconImage Grid.Column="1"
+                                             Icon="ChevronDown"
+                                             Foreground="AliceBlue"
+                                             Width="12"
+                                             Height="12"
+                                             Margin="0,0,5,0"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             IsHitTestVisible="False"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="RoundedComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="Foreground" Value="AliceBlue"/>
+        <Setter Property="Background" Value="CadetBlue"/>
+        <Setter Property="Padding" Value="10,5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
-                    
+                    <Grid x:Name="templateRoot">
+                        <ToggleButton x:Name="ToggleButton"
+                                      Style="{StaticResource ComboBoxToggleStyle}"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     
     <!--Transactions DataGrid Style-->
+    <Style x:Key="TransactionCellStyle" TargetType="DataGridCell">
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="AliceBlue"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="CornflowerBlue"/>
+                <Setter Property="Foreground" Value="AliceBlue"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="TransactionRowStyle" TargetType="DataGridRow">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="2,5,2,5"/>
+    </Style>
+    
     <Style x:Key="TransactionsStyle" TargetType="DataGrid">
-        
+        <Setter Property="Foreground" Value="#1d1e21"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="RowHeaderWidth" Value="0"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="AliceBlue"/>
+        <Setter Property="RowStyle" Value="{StaticResource TransactionRowStyle}"/>
+        <Setter Property="CellStyle" Value="{StaticResource TransactionCellStyle}"/>
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="DarkSlateBlue"/>
+                    <Setter Property="Foreground" Value="AliceBlue"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
     
 </ResourceDictionary>
