@@ -11,8 +11,6 @@ namespace BudgetTracker;
 
 public partial class MainWindow
 {
-    //private ObservableCollection<Transaction> _transactions;
-    
     //Budget Objects
     private decimal incomeGoal;
     private decimal needsGoal;
@@ -26,14 +24,17 @@ public partial class MainWindow
     private decimal savingsPlan;
     private decimal totalPlan;
     
+    //Transactions stuff
+    private ObservableCollection<Transaction> _transactions;
+    
 
     public MainWindow()
     {
         InitializeComponent();
         this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-        //_transactions = new ObservableCollection<Transaction>();
-        //dgTransactions.ItemsSource = _transactions;
-        //dpDate.SelectedDate = DateTime.Today;
+        _transactions = new ObservableCollection<Transaction>();
+        dgTransactions.ItemsSource = _transactions;
+        dpDate.SelectedDate = DateTime.Today;
     }
     private void UpperBar_MouseDown(object sender, MouseButtonEventArgs e)
     {
@@ -100,50 +101,41 @@ public partial class MainWindow
         txtTotalPlan.Text = $"{totalPlan:F2}";
         
     }
-    
-    /*private void BtnAdd_Click(object sender, RoutedEventArgs e)
+
+    private void BtnAdd_Click(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(txtName.Text))
-        {
-            MessageBox.Show("Please enter a name for the transaction");
-            return;
-        }
-
-        if (!dpDate.SelectedDate.HasValue)
-        {
-            MessageBox.Show("Please select a date for the transaction");
-            return;
-        }
-
-        if (!decimal.TryParse(txtAmount.Text, out decimal amount))
-        {
-            MessageBox.Show("Please enter a number for the amount");
-            return;
-        }
-
         string category = ((ComboBoxItem)cmbCategory.SelectedItem).Content.ToString() ?? string.Empty;
-        string currency = ((ComboBoxItem)cmbCurrency.SelectedItem).Content.ToString() ?? string.Empty;
 
-        Transaction newTransaction = new Transaction
+        if (dpDate.SelectedDate != null)
         {
-            Name = txtName.Text,
-            Date = dpDate.SelectedDate.Value,
-            Amount = amount,
-            Category = category,
-            Currency = currency
-        };
+            Transaction newTransaction = new Transaction
+            {
+                Name = txtName.Text,
+                Date = dpDate.SelectedDate.Value,
+                Amount = decimal.Parse(txtAmount.Text),
+                Category = category
+            };
 
-        _transactions.Add(newTransaction);
-
+            _transactions.Add(newTransaction);
+        }
+        
         txtName.Clear();
         txtAmount.Clear();
         dpDate.SelectedDate = DateTime.Today;
         cmbCategory.SelectedIndex = 0;
-        cmbCurrency.SelectedIndex = 0;
-
-        UpdateChart(null, null);
     }
-
+    
+    
+    public class Transaction
+    {
+        public string? Name { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Amount { get; set; } = (decimal)0.0d;
+        public string? Category { get; set; }
+        //public string? Currency { get; set; }
+    }
+    
+    /*
     private void UpdateChart(object sender, RoutedEventArgs e)
     {
         if (_transactions.Count == 0)
@@ -320,15 +312,5 @@ public partial class MainWindow
                     .GroupBy(t => t.Date.ToString("MMM yyyy"))
                     .ToDictionary(g => g.Key, g => g.Sum(t => t.Amount));
             }
-        }
-    
-
-    public class Transaction
-    {
-        public string Name { get; set; } = string.Empty;
-        public DateTime Date { get; set; }
-        public decimal Amount { get; set; } = (decimal)0.0d;
-        public string? Category { get; set; }
-        public string? Currency { get; set; }
-    }*/
+        }*/
 }
