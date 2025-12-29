@@ -59,13 +59,26 @@
                         <GradientStop Color="#141414" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
+                <StackPanel>
+                    <RadioButton x:Name="btnDashboard"
+                                 Style="{StaticResource SideMenuRadioButton}"
+                                 Margin="10" 
+                                 Content="Dashboard" 
+                                 Foreground="AliceBlue"
+                                 IsChecked="True"
+                                 Checked="rbDashboard_Checked"/>
+                    <RadioButton Margin="10" 
+                                 Style="{StaticResource SideMenuRadioButton}"
+                                 Content="Transactions"
+                                 Checked="rbTransactions_Checked"
+                                 Foreground="AliceBlue"/>
+                </StackPanel>
             </Border>
             
             <!--Main Section-->
             <Border Grid.Column="1" CornerRadius="0,10,10,0">
                 
-                <!--Dashboard View-->
-                <Grid x:Name="DashboardView">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
@@ -98,7 +111,7 @@
                     <Grid Grid.Row="1">
                         
                         <!--Dashboard view-->
-                        <Grid Visibility="Collapsed">
+                        <Grid x:Name="dashboardView" Visibility="Visible">
                             <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="360"/>
                             <ColumnDefinition/>
@@ -236,7 +249,8 @@
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="3" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="calculated" HorizontalAlignment="Center"
+                                    <TextBlock x:Name="txtNeedsActual"
+                                        Text="calculated" HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="4" Background="#c2becf" 
@@ -266,7 +280,8 @@
                                 </Border>
                                 <Border Grid.Row="3" Grid.Column="3" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="calculated" HorizontalAlignment="Center"
+                                    <TextBlock x:Name="txtWantsActual"
+                                        Text="calculated" HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="3" Grid.Column="4" Background="#c2becf" 
@@ -295,7 +310,8 @@
                                 </Border>
                                 <Border Grid.Row="4" Grid.Column="3" Background="#c2becf"
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="calculated"
+                                    <TextBlock x:Name="txtSavingsActual"
+                                        Text="calculated"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="4" Grid.Column="4" Background="#c2becf"
@@ -332,7 +348,8 @@
                                 <Border Grid.Row="5" Grid.Column="3" Background="#9b8fb0" 
                                         BorderBrush="DarkSlateBlue"
                                         BorderThickness="0,2,0,0">
-                                    <TextBlock Text="N+W+S"
+                                    <TextBlock x:Name="txtTotalActual"
+                                        Text="N+W+S"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                                 </Border>
@@ -345,7 +362,9 @@
                                 </Border>
                             </Grid>
                         </Grid>
-                        <Grid Visibility="Visible">
+                        
+                        <!--Transactions view-->
+                        <Grid x:Name="transactionsView" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>

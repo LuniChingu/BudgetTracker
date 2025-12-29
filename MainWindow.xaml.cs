@@ -2,10 +2,17 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
+//using LiveChartsCore;
+//using LiveChartsCore.SkiaSharpView;
+//using LiveChartsCore.SkiaSharpView.Painting;
+//using SkiaSharp;
+
+//TODO: add calculating percentages of the actuals. (category / income = %%)
+//TODO: add color coding based on percentages
+//TODO: add fields to fill in planned income and actual income
+//TODO: make the 'plans' form in a seperate window/popup and a bit more intricate (like it is in my excel)
+//TODO: make adding a transaction also a seperate window or popup + add ability to edit and delete rows from the datagrid
+//TODO: add an ability to pick a month to see in the dashboard (default is current month) + add ability to save the month's view into some sort of document?
 
 namespace BudgetTracker;
 
@@ -18,24 +25,28 @@ public partial class MainWindow
     private decimal savingsGoal;
     private decimal totalGoal;
     
-    private decimal incomePlan;
+    //private decimal incomePlan;
     private decimal needsPlan;
     private decimal wantsPlan;
     private decimal savingsPlan;
     private decimal totalPlan;
     
     //Transactions stuff
-    private ObservableCollection<Transaction> _transactions;
+    private readonly ObservableCollection<Transaction> _transactions;
     
 
     public MainWindow()
     {
         InitializeComponent();
         this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-        _transactions = new ObservableCollection<Transaction>();
+        _transactions = []; // study note: this is the collection expression for "new ObservableCollection<Transaction>()"
         dgTransactions.ItemsSource = _transactions;
         dpDate.SelectedDate = DateTime.Today;
+        
+        CalculateActuals();
     }
+
+    #region Upper Panel
     private void UpperBar_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed) DragMove();
@@ -44,7 +55,39 @@ public partial class MainWindow
     {
         this.Close();
     }
+    #endregion
+    
+    #region Side bar menu
+    private void rbDashboard_Checked(object sender, RoutedEventArgs e)
+    {
+        if (dashboardView != null)
+        {
+            ShowDashboard();
+        }
+    }
 
+    private void rbTransactions_Checked(object sender, RoutedEventArgs e)
+    {
+        if (transactionsView != null)
+        {
+            ShowTransactions();
+        }
+    }
+
+    private void ShowDashboard()
+    {
+        dashboardView.Visibility = Visibility.Visible;
+        transactionsView.Visibility = Visibility.Collapsed;
+        CalculateActuals();
+    }
+    private void ShowTransactions()
+    {
+        dashboardView.Visibility = Visibility.Collapsed;
+        transactionsView.Visibility = Visibility.Visible;
+    }
+    #endregion
+
+    #region Budget Table colculations
     private void TxtIncomeGoal_LostFocus(object sender, RoutedEventArgs e)
     {
         var textBox = (TextBox)sender;
@@ -90,7 +133,7 @@ public partial class MainWindow
         totalPlan = needsPlan + wantsPlan + savingsPlan;
         
         UpdatePlannedBudget();
-        
+        CalculateActuals();
     }
 
     private void UpdatePlannedBudget()
@@ -102,13 +145,39 @@ public partial class MainWindow
         
     }
 
+    private readonly string[] needsCategories = ["Bills", "Transport", "Food"];
+    private readonly string[] wantsCategories = ["Shopping"];
+    private readonly  string[] savingsCategories = ["Other"];
+
+    private void CalculateActuals()
+    {
+        var currentMonth = DateTime.Today;
+
+        var monthTransactions = _transactions
+            .Where(t => t.Date.Month == currentMonth.Month &&
+                        t.Date.Year == currentMonth.Year)
+            .ToList();
+        var needsActual = monthTransactions.Where(t => needsCategories.Contains(t.Category)).Sum(t => t.Amount);
+        var wantsActual = monthTransactions.Where(t => wantsCategories.Contains(t.Category)).Sum(t => t.Amount);
+        var savingsActual = monthTransactions.Where(t => savingsCategories.Contains(t.Category)).Sum(t => t.Amount);
+        
+        var totalActual = needsActual + wantsActual + savingsActual;
+        
+        txtNeedsActual.Text = $"{needsActual:F2}";
+        txtWantsActual.Text = $"{wantsActual:F2}";
+        txtSavingsActual.Text = $"{savingsActual:F2}";
+        txtTotalActual.Text = $"{totalActual:F2}";
+    }
+    #endregion
+
+    #region Adding a Transaction to DataGrid
     private void BtnAdd_Click(object sender, RoutedEventArgs e)
     {
-        string category = ((ComboBoxItem)cmbCategory.SelectedItem).Content.ToString() ?? string.Empty;
+        var category = ((ComboBoxItem)cmbCategory.SelectedItem).Content.ToString() ?? string.Empty;
 
         if (dpDate.SelectedDate != null)
         {
-            Transaction newTransaction = new Transaction
+            var newTransaction = new Transaction
             {
                 Name = txtName.Text,
                 Date = dpDate.SelectedDate.Value,
@@ -123,6 +192,8 @@ public partial class MainWindow
         txtAmount.Clear();
         dpDate.SelectedDate = DateTime.Today;
         cmbCategory.SelectedIndex = 0;
+        
+        CalculateActuals();
     }
     
     
@@ -134,6 +205,7 @@ public partial class MainWindow
         public string? Category { get; set; }
         //public string? Currency { get; set; }
     }
+    #endregion
     
     /*
     private void UpdateChart(object sender, RoutedEventArgs e)
