@@ -129,7 +129,7 @@
                     <Grid Grid.Row="1">
                         
                         <!--Dashboard view-->
-                        <Grid x:Name="dashboardView" Visibility="Collapsed">
+                        <Grid x:Name="dashboardView" Visibility="Visible">
                             <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="360"/>
                             <ColumnDefinition/>
@@ -387,7 +387,7 @@
                         </Grid>
                         
                         <!--Transactions view-->
-                        <Grid x:Name="transactionsView" Visibility="Visible">
+                        <Grid x:Name="transactionsView" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>

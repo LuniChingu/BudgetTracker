@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.IO;
 //using LiveChartsCore;
 //using LiveChartsCore.SkiaSharpView;
 //using LiveChartsCore.SkiaSharpView.Painting;
@@ -32,7 +34,7 @@ public partial class MainWindow
     private decimal totalPlan;
     
     //Transactions stuff
-    private readonly ObservableCollection<Transaction> _transactions;
+    private ObservableCollection<Transaction> _transactions;
     
 
     public MainWindow()
@@ -44,6 +46,22 @@ public partial class MainWindow
         dpDate.SelectedDate = DateTime.Today;
         
         CalculateActuals();
+        var savedData = LoadData();
+        if (savedData != null && savedData.transactionsTable != null)
+        {
+
+            foreach (var t in savedData.transactionsTable!)
+            {
+                foreach (var item in savedData.transactionsTable)
+                {
+                    dgTransactions.
+                }
+            }
+                txtIncomeGoal.Text = savedData.IncomeGoal.ToString("F2");
+                txtNeedsGoal.Text = savedData.NeedsGoal.ToString("F2");
+                txtWantsGoal.Text = savedData.WantsGoal.ToString("F2");
+                txtSavingsGoal.Text = savedData.SavingsGoal.ToString("F2");
+        }
     }
 
     #region Upper Panel
@@ -107,6 +125,8 @@ public partial class MainWindow
             MessageBox.Show("Income goal must be a number");
             textBox.Text = incomeGoal.ToString("F2");
         }
+        
+        SaveData(_transactions, incomeGoal, needsGoal, wantsGoal, savingsGoal);
     }
 
     private void UpdateGoals()
@@ -134,6 +154,7 @@ public partial class MainWindow
         
         UpdatePlannedBudget();
         CalculateActuals();
+        SaveData(_transactions, incomeGoal, needsGoal, wantsGoal, savingsGoal);
     }
 
     private void UpdatePlannedBudget()
@@ -167,6 +188,26 @@ public partial class MainWindow
         txtWantsActual.Text = $"{wantsActual:F2}";
         txtSavingsActual.Text = $"{savingsActual:F2}";
         txtTotalActual.Text = $"{totalActual:F2}";
+        
+        CalculateBudgetPercentages(needsActual, wantsActual, savingsActual, totalActual);
+    }
+    #endregion
+    
+    #region percentage calculations
+    private void CalculateBudgetPercentages(decimal needsActual, decimal wantsActual, decimal savingsActual,
+        decimal totalActual)
+    {
+        var needsPercent = CalculatePercentage(needsActual, needsGoal);
+        var wantsPercent = CalculatePercentage(wantsActual, wantsGoal);
+        var savingsPercent = CalculatePercentage(savingsActual, savingsGoal);
+        
+    }
+
+    private static decimal CalculatePercentage(decimal actual, decimal goal)
+    {
+        if (goal == 0) return 0;
+
+        return (actual / goal) * 100;
     }
     #endregion
 
@@ -206,7 +247,42 @@ public partial class MainWindow
         //public string? Currency { get; set; }
     }
     #endregion
+
+    #region Save/Load System
+
+    private void SaveData(ObservableCollection<Transaction> transactions, decimal income, decimal needs, decimal wants, decimal savings)
+    {
+        var dataToSave = new AppData
+        {
+            transactionsTable = transactions.ToList(),
+            IncomeGoal = income,
+            NeedsGoal =  needs,
+            WantsGoal =  wants,
+            SavingsGoal =  savings
+        };
+
+        var jsonString = JsonSerializer.Serialize(dataToSave);
+        File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AppData.json"), jsonString);
+
+    }
+
+    public static AppData LoadData()
+    {
+        if (!File.Exists("AppData.json")) return new AppData();
+        string jsonString = File.ReadAllText("AppData.json");
+        return JsonSerializer.Deserialize<AppData>(jsonString)!;
+    }
     
+    public class AppData
+    {
+        public List<Transaction>? transactionsTable { get; set; }
+        public decimal IncomeGoal {get; set;}
+        public decimal NeedsGoal { get; set; }
+        public decimal WantsGoal {get; set;}
+        public decimal SavingsGoal {get; set;}
+    }
+
+    #endregion
     /*
     private void UpdateChart(object sender, RoutedEventArgs e)
     {
