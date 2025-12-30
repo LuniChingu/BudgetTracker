@@ -411,9 +411,11 @@
                                         <TextBlock Text="Amount: " VerticalAlignment="Center"/>
                                         <TextBox x:Name="txtAmount" Text="0.00" Margin="5,0,5,0" Width="100"/>
                                         <TextBlock Text="Category: " VerticalAlignment="Center"/>
-                                        <ComboBox x:Name="cmbCategory" 
+                                        <ComboBox x:Name="cmbCategory"
                                                   Style="{StaticResource RoundedComboBoxStyle}"
-                                                  Margin="5,0,5,0" Width="100">
+                                                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+                                                  Margin="5,0,5,0" Width="100"
+                                                  FontFamily="Resources/Fonts/#Lexend">
                                             <ComboBoxItem Content="Bills" IsSelected="True"/>
                                             <ComboBoxItem Content="Transport"/>
                                             <ComboBoxItem Content="Food"/>

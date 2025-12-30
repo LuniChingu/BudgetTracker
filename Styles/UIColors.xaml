@@ -122,7 +122,8 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="templateRoot"
                             Background="LightSlateGray"
-                            CornerRadius="5">
+                            CornerRadius="5"
+                            IsHitTestVisible="True">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -139,6 +140,40 @@
                                              IsHitTestVisible="False"/>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="templateRoot" Property="Background" Value="DarkSlateBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Foreground" Value="AliceBlue"/>
+        <Setter Property="Background" Value="LightSlateGray"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="itemBorder"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="itemBorder" Property="Background" Value="DarkSlateBlue"/>
+                            <Setter TargetName="itemBorder" Property="CornerRadius" Value="5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="itemBorder" Property="BorderBrush" Value="DarkSlateBlue"/>
+                            <Setter TargetName="itemBorder" Property="BorderThickness" Value="2"/>
+                            <Setter TargetName="itemBorder" Property="CornerRadius" Value="5"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -153,8 +188,35 @@
                 <ControlTemplate TargetType="ComboBox">
                     <Grid x:Name="templateRoot">
                         <ToggleButton x:Name="ToggleButton"
-                                      Style="{StaticResource ComboBoxToggleStyle}"/>
+                                      Style="{StaticResource ComboBoxToggleStyle}"
+                                      Grid.ColumnSpan="2"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          IsHitTestVisible="False"
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          Margin="8,0,0,0"/>
+                        <Popup x:Name="PART_Popup"
+                               AllowsTransparency="True"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               Placement="Bottom">
+                            <Border x:Name="dropDownBorder" Background="LightSlateGray" BorderBrush="LightSlateGray" BorderThickness="1" CornerRadius="5"
+                                    MinWidth="{Binding ActualWidth, ElementName=templateRoot}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <ScrollViewer x:Name="DropDownScrollView">
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter TargetName="dropDownBorder" Property="Height" Value="95"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
