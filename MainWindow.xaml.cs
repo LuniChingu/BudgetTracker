@@ -35,33 +35,22 @@ public partial class MainWindow
     
     //Transactions stuff
     private ObservableCollection<Transaction> _transactions;
+    private readonly string dataFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BudgetTracker", "AppData.json");
     
 
     public MainWindow()
     {
         InitializeComponent();
+        LoadData();
+        
         this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         _transactions = []; // study note: this is the collection expression for "new ObservableCollection<Transaction>()"
         dgTransactions.ItemsSource = _transactions;
         dpDate.SelectedDate = DateTime.Today;
         
+        ShowDashboard();
         CalculateActuals();
-        var savedData = LoadData();
-        if (savedData != null && savedData.transactionsTable != null)
-        {
-
-            foreach (var t in savedData.transactionsTable!)
-            {
-                foreach (var item in savedData.transactionsTable)
-                {
-                    dgTransactions.
-                }
-            }
-                txtIncomeGoal.Text = savedData.IncomeGoal.ToString("F2");
-                txtNeedsGoal.Text = savedData.NeedsGoal.ToString("F2");
-                txtWantsGoal.Text = savedData.WantsGoal.ToString("F2");
-                txtSavingsGoal.Text = savedData.SavingsGoal.ToString("F2");
-        }
+        
     }
 
     #region Upper Panel
@@ -126,7 +115,7 @@ public partial class MainWindow
             textBox.Text = incomeGoal.ToString("F2");
         }
         
-        SaveData(_transactions, incomeGoal, needsGoal, wantsGoal, savingsGoal);
+        SaveData();
     }
 
     private void UpdateGoals()
@@ -153,8 +142,8 @@ public partial class MainWindow
         totalPlan = needsPlan + wantsPlan + savingsPlan;
         
         UpdatePlannedBudget();
+        SaveData();
         CalculateActuals();
-        SaveData(_transactions, incomeGoal, needsGoal, wantsGoal, savingsGoal);
     }
 
     private void UpdatePlannedBudget()
@@ -229,6 +218,8 @@ public partial class MainWindow
             _transactions.Add(newTransaction);
         }
         
+        SaveData();
+        
         txtName.Clear();
         txtAmount.Clear();
         dpDate.SelectedDate = DateTime.Today;
@@ -250,32 +241,73 @@ public partial class MainWindow
 
     #region Save/Load System
 
-    private void SaveData(ObservableCollection<Transaction> transactions, decimal income, decimal needs, decimal wants, decimal savings)
+    private void SaveData()
     {
         var dataToSave = new AppData
         {
-            transactionsTable = transactions.ToList(),
-            IncomeGoal = income,
-            NeedsGoal =  needs,
-            WantsGoal =  wants,
-            SavingsGoal =  savings
+            transactionsTable = _transactions.ToList(),
+            IncomeGoal = incomeGoal,
+            NeedsGoal = needsGoal,
+            WantsGoal = wantsGoal,
+            SavingsGoal = savingsGoal
         };
 
-        var jsonString = JsonSerializer.Serialize(dataToSave);
-        File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AppData.json"), jsonString);
+        try
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var jsonString = JsonSerializer.Serialize(dataToSave, options);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(dataFilePath)!);
+            File.WriteAllText(dataFilePath, jsonString);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        
+        MessageBox.Show($"Data location: {dataFilePath}");
 
     }
 
-    public static AppData LoadData()
+    public void LoadData()
     {
-        if (!File.Exists("AppData.json")) return new AppData();
-        string jsonString = File.ReadAllText("AppData.json");
-        return JsonSerializer.Deserialize<AppData>(jsonString)!;
+        if (!File.Exists(dataFilePath))
+        {
+            incomeGoal = 1500m;
+            needsGoal = 1500m;
+            wantsGoal = 1500m;
+            savingsGoal = 1500m;
+            _transactions = [];
+            return;
+        }
+
+        try
+        {
+            var jsonString = File.ReadAllText(dataFilePath);
+            var data = JsonSerializer.Deserialize<AppData>(jsonString);
+
+            if (data != null)
+            {
+                incomeGoal = data.IncomeGoal;
+                needsGoal = data.NeedsGoal;
+                wantsGoal = data.WantsGoal;
+                savingsGoal = data.SavingsGoal;
+
+                _transactions =
+                    new ObservableCollection<Transaction>(data.transactionsTable ?? new List<Transaction>());
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            _transactions = [];
+        }
     }
     
     public class AppData
     {
-        public List<Transaction>? transactionsTable { get; set; }
+        public List<MainWindow.Transaction>? transactionsTable { get; set; }
         public decimal IncomeGoal {get; set;}
         public decimal NeedsGoal { get; set; }
         public decimal WantsGoal {get; set;}
