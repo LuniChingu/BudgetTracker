@@ -41,16 +41,15 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
-        LoadData();
         
         this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         _transactions = []; // study note: this is the collection expression for "new ObservableCollection<Transaction>()"
         dgTransactions.ItemsSource = _transactions;
         dpDate.SelectedDate = DateTime.Today;
         
+        LoadData();
         ShowDashboard();
         CalculateActuals();
-        
     }
 
     #region Upper Panel
@@ -189,7 +188,6 @@ public partial class MainWindow
         var needsPercent = CalculatePercentage(needsActual, needsGoal);
         var wantsPercent = CalculatePercentage(wantsActual, wantsGoal);
         var savingsPercent = CalculatePercentage(savingsActual, savingsGoal);
-        
     }
 
     private static decimal CalculatePercentage(decimal actual, decimal goal)
@@ -240,7 +238,6 @@ public partial class MainWindow
     #endregion
 
     #region Save/Load System
-
     private void SaveData()
     {
         var dataToSave = new AppData
@@ -264,9 +261,6 @@ public partial class MainWindow
         {
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        
-        MessageBox.Show($"Data location: {dataFilePath}");
-
     }
 
     public void LoadData()
@@ -277,7 +271,6 @@ public partial class MainWindow
             needsGoal = 1500m;
             wantsGoal = 1500m;
             savingsGoal = 1500m;
-            _transactions = [];
             return;
         }
 
@@ -293,8 +286,13 @@ public partial class MainWindow
                 wantsGoal = data.WantsGoal;
                 savingsGoal = data.SavingsGoal;
 
-                _transactions =
-                    new ObservableCollection<Transaction>(data.transactionsTable ?? new List<Transaction>());
+                _transactions.Clear();
+                foreach (var transaction in data.transactionsTable ?? new List<Transaction>())
+                {
+                    _transactions.Add(transaction);
+                }
+                
+                UpdateGoals();
             }
         }
         catch (Exception ex)
@@ -307,7 +305,7 @@ public partial class MainWindow
     
     public class AppData
     {
-        public List<MainWindow.Transaction>? transactionsTable { get; set; }
+        public List<Transaction>? transactionsTable { get; set; }
         public decimal IncomeGoal {get; set;}
         public decimal NeedsGoal { get; set; }
         public decimal WantsGoal {get; set;}
@@ -315,6 +313,7 @@ public partial class MainWindow
     }
 
     #endregion
+    
     /*
     private void UpdateChart(object sender, RoutedEventArgs e)
     {

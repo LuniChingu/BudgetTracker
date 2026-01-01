@@ -134,9 +134,14 @@
                             <ColumnDefinition Width="360"/>
                             <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="190"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
                         
                             <!--Planned Spending form-->
-                            <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <StackPanel Grid.Row="0" Orientation="Vertical" Grid.Column="1">
                                 <TextBlock Text="Planned Expenses" FontSize="16"
                                         Foreground="white" Margin="5,2,2,2"
                                         FontFamily="Resources/Fonts/#Lexend" FontWeight="Light"/>
@@ -164,7 +169,7 @@
                             </StackPanel>
                         
                             <!--Budget Table-->
-                            <Grid Grid.Column="0" Margin="10,10,10,10">
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="10,10,10,10">
                             
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/> <!--Table Header Row-->
@@ -277,7 +282,7 @@
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="4" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="%%" HorizontalAlignment="Center"
+                                    <TextBlock x:Name="txtNeedsPercentage" Text="%%" HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                                 </Border>
                             
@@ -308,8 +313,8 @@
                                 </Border>
                                 <Border Grid.Row="3" Grid.Column="4" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="%%" HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="txtWantsPercentage" Text="%%" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
                                 </Border>
                             
                                 <!--Savings Row-->
@@ -338,8 +343,8 @@
                                 </Border>
                                 <Border Grid.Row="4" Grid.Column="4" Background="#c2becf"
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock Text="%%"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="txtSavingsPercentage" Text="%%"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             
                                 <!--Total Row-->
@@ -380,10 +385,28 @@
                                         BorderBrush="DarkSlateBlue"
                                         BorderThickness="0,2,0,0"
                                         CornerRadius="0,0,5,0">
-                                    <TextBlock Text="N+W+S"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="txtTotalUsedPercentage" Text="N+W+S"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </Grid>
+                            
+                            <!--Pie Chart
+                            <Grid Grid.Column="0" ColumnSpan="2" Grid.Row="1">
+                                <lvc:PieChart SeriesSource="{Binding Data}">
+                                    <lvc:PieChart.SeriesTemplate>
+                                        <DataTemplate>
+                                            <lvc:XamlPieSeries Values="{Binding Values}"/>
+                                        </DataTemplate>
+                                    </lvc:PieChart.SeriesTemplate>
+                                    <lvc:PieChart.Title>
+                                        <lvc:XamlDrawnLabelVisual
+                                            Text="Title"
+                                            Paint="#000"
+                                            TextSize="25"
+                                            Padding="15"/>
+                                    </lvc:PieChart.Title>
+                                </lvc:PieChart>
+                            </Grid>-->
                         </Grid>
                         
                         <!--Transactions view-->
