@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         AllowsTransparency="True"
         Background="Transparent"
+        WindowStyle="None"
         Title="PlanEditorWindow" Height="650" Width="400">
     <Border Background="#1f1f24" CornerRadius="20">
         <Grid>

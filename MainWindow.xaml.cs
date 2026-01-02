@@ -133,7 +133,6 @@ public partial class MainWindow
             return;
         }
         
-        needsPlan = decimal.Parse(txtNeedsTotalPlan.Text);
         wantsPlan = decimal.Parse(txtWantsTotalPlan.Text);
         savingsPlan = decimal.Parse(txtSavingsTotalPlan.Text);
         
@@ -186,11 +185,10 @@ public partial class MainWindow
     {
         var planEditor = new PlanEditorWindow();
 
-        bool? result = planEditor.ShowDialog();
-
-        if (result == true)
+        if (planEditor.ShowDialog() == true)
         {
-            
+            var plannedNeedsTotal = planEditor.apartmentTotal + planEditor.carTotal + planEditor.healthTotal;
+            needsPlan = plannedNeedsTotal;
         }
     }
 

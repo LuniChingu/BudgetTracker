@@ -205,12 +205,24 @@
                                                Foreground="AliceBlue"/>
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="2" Background="DarkSlateBlue" >
-                                    <TextBlock Text="Plan"
-                                               FontFamily="Resources/Fonts/#Lexend"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Foreground="AliceBlue"
-                                               Margin="10,0,5,0"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Plan"
+                                                   FontFamily="Resources/Fonts/#Lexend"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="AliceBlue"
+                                                   Margin="10,0,5,0"/>
+                                        <Button Background="Transparent"
+                                                BorderThickness="0"
+                                                Click="btnEditPlan_Click">
+                                            <sharp:IconImage Icon="PenToSquare"
+                                                         Foreground="AliceBlue"
+                                                         Width="15"
+                                                         Height="15"
+                                                         Margin="5,0,5,0"
+                                                         Style="{StaticResource BarButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="3" Background="DarkSlateBlue">
                                     <TextBlock Text="Actual"
@@ -275,21 +287,10 @@
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="2" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock x:Name="txtNeedsPlan"
-                                                   Text="0.00"
-                                                   VerticalAlignment="Center"
-                                                   Margin="10,0,5,0"/>
-                                        <Button Background="Transparent" BorderThickness="0"
-                                            Click="btnEditPlan_Click">
-                                            <sharp:IconImage Icon="PenToSquare"
-                                                         Foreground="Black"
-                                                         Width="15"
-                                                         Height="15"
-                                                         Margin="5,0,5,0"
-                                                         Style="{StaticResource BarButtonIcon}"/>
-                                        </Button>
-                                    </StackPanel>
+                                    <TextBlock x:Name="txtNeedsPlan"
+                                               Text="0.00"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="3" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
