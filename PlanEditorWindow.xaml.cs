@@ -12,7 +12,7 @@ public partial class PlanEditorWindow : Window
 
     private void txtExpense_Changed(object sender, RoutedEventArgs routedEventArgs)
     {
-        
+        UpdateFixedExpenses();
     }
 
     private void UpdateFixedExpenses()
