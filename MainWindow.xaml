@@ -199,28 +199,33 @@
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="1" Background="DarkSlateBlue" >
                                     <TextBlock Text="Goal"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Foreground="AliceBlue"/>
+                                               FontFamily="Resources/Fonts/#Lexend"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="AliceBlue"/>
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="2" Background="DarkSlateBlue" >
                                     <TextBlock Text="Plan"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Foreground="AliceBlue"/>
+                                               FontFamily="Resources/Fonts/#Lexend"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="AliceBlue"
+                                               Margin="10,0,5,0"/>
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="3" Background="DarkSlateBlue">
                                     <TextBlock Text="Actual"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Foreground="AliceBlue"/>
+                                               FontFamily="Resources/Fonts/#Lexend"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="AliceBlue"/>
                                 </Border>
                                 <Border Grid.Row="0" Grid.Column="4" Background="DarkSlateBlue"
                                         CornerRadius="0,5,0,0">
                                     <TextBlock Text="Budget"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Foreground="AliceBlue"/>
+                                               FontFamily="Resources/Fonts/#Lexend"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="AliceBlue"/>
                                 </Border>
                             
                                 <!--Income Row-->
@@ -250,7 +255,7 @@
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="1" Grid.Column="4" Background="#c2becf" 
-                                        BorderBrush="Lavender" BorderThickness="0,0,1,0">
+                                        BorderBrush="Lavender" BorderThickness="0,0,0,0">
                                     <TextBlock x:Name="txtIncomeBudget" Text="100%" 
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -270,9 +275,21 @@
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="2" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
-                                    <TextBlock x:Name="txtNeedsPlan"
-                                           Text="0.00"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="txtNeedsPlan"
+                                                   Text="0.00"
+                                                   VerticalAlignment="Center"
+                                                   Margin="10,0,5,0"/>
+                                        <Button Background="Transparent" BorderThickness="0"
+                                            Click="btnEditPlan_Click">
+                                            <sharp:IconImage Icon="PenToSquare"
+                                                         Foreground="Black"
+                                                         Width="15"
+                                                         Height="15"
+                                                         Margin="5,0,5,0"
+                                                         Style="{StaticResource BarButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="3" Background="#c2becf" 
                                         BorderBrush="Lavender" BorderThickness="0,1,1,0">
@@ -281,7 +298,7 @@
                                            VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="2" Grid.Column="4" Background="#c2becf" 
-                                        BorderBrush="Lavender" BorderThickness="0,1,1,0">
+                                        BorderBrush="Lavender" BorderThickness="0,1,0,0">
                                     <TextBlock x:Name="txtNeedsPercentage" Text="%%" HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                                 </Border>
@@ -312,7 +329,7 @@
                                            VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="3" Grid.Column="4" Background="#c2becf" 
-                                        BorderBrush="Lavender" BorderThickness="0,1,1,0">
+                                        BorderBrush="Lavender" BorderThickness="0,1,0,0">
                                     <TextBlock x:Name="txtWantsPercentage" Text="%%" HorizontalAlignment="Center"
                                                VerticalAlignment="Center"/>
                                 </Border>
@@ -342,7 +359,7 @@
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border Grid.Row="4" Grid.Column="4" Background="#c2becf"
-                                        BorderBrush="Lavender" BorderThickness="0,1,1,0">
+                                        BorderBrush="Lavender" BorderThickness="0,1,0,0">
                                     <TextBlock x:Name="txtSavingsPercentage" Text="%%"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -448,7 +465,7 @@
                                     </StackPanel>
                                     
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                                        <Button x:Name="BtnAddClick" Content="Add Transaction" Padding="5" 
+                                        <Button x:Name="BtnAddClick" Content="Add Transaction" Padding="5,0" 
                                                 Style="{StaticResource GenericBtn}" FontFamily="Resources/Fonts/#Lexend"
                                                 Click="BtnAdd_Click"/>
                                     </StackPanel>
