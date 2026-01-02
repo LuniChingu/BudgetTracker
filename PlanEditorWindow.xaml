@@ -1,0 +1,327 @@
+<Window x:Class="BudgetTracker.PlanEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:BudgetTracker"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Title="PlanEditorWindow" Height="650" Width="400">
+    <Border Background="#1f1f24" CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+           
+            <TabControl Grid.Row="1" BorderThickness="0" Background="Transparent">
+                <TabItem Header="FIXED" IsSelected="True" FontFamily="Resources/Fonts/#Lexend">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid Grid.Row="0">
+                            <StackPanel>
+                                <TextBlock Text="Planned Expenses"
+                                           Foreground="AliceBlue"
+                                           FontSize="18"
+                                           FontFamily="Resources/Fonts/#Lexend"
+                                           Padding="15, 0, 15, 5"/>
+                                <TextBlock Text="Fill in all known regular expenses"
+                                           Foreground="AliceBlue"
+                                           FontSize="12"
+                                           FontFamily="Resources/Fonts/#Lexend"
+                                           Padding="15,0"
+                                           TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid x:Name="FixedExpenses" Grid.Row="1" Margin="20, 10, 20, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                
+                <!--Apartment Header Row-->
+                <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" BorderThickness="1" BorderBrush="Bisque">
+                    <TextBlock Text="APARTMENT"
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Border>
+                
+                <!--Row 1-->
+                <Border Grid.Column="0" Grid.Row="1">
+                    <TextBlock Text="RENT" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="1">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 2-->
+                <Border Grid.Column="0" Grid.Row="2">
+                    <TextBlock Text="PROPERTY TAX" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="2">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 3-->
+                <Border Grid.Column="0" Grid.Row="3">
+                    <TextBlock Text="ELECTRICITY" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="3">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 4-->
+                <Border Grid.Column="0" Grid.Row="4">
+                    <TextBlock Text="GAS" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="4">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 5-->
+                <Border Grid.Column="0" Grid.Row="5">
+                    <TextBlock Text="WATER" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="5">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 6-->
+                <Border Grid.Column="0" Grid.Row="6">
+                    <TextBlock Text="COMMITTEE" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="6">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 7-->
+                <Border Grid.Column="0" Grid.Row="7">
+                    <TextBlock Text="COMMITTEE" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="7">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 8-->
+                <Border Grid.Column="0" Grid.Row="8">
+                    <TextBlock Text="INTERNET" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="8">
+                    <TextBox Text="0.00" Tag="Apartment"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--APARTMENT TOTALS-->
+                <Border Grid.Column="0" Grid.Row="9">
+                    <TextBlock Text="TOTAL: "
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="9">
+                    <TextBlock x:Name="txtApartmentTotal" Text="0.00"
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                </Border>
+                
+                <!--Car Header Row-->
+                <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="10" BorderThickness="1" BorderBrush="Bisque">
+                    <TextBlock Text="CAR"
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Border>
+                
+                <!--Row 1-->
+                <Border Grid.Column="0" Grid.Row="11">
+                    <TextBlock Text="LEASE" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="11">
+                    <TextBox Text="0.00" Tag="Car"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 2-->
+                <Border Grid.Column="0" Grid.Row="12">
+                    <TextBlock Text="GAS" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="12">
+                    <TextBox Text="0.00" Tag="Car"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 3-->
+                <Border Grid.Column="0" Grid.Row="13">
+                    <TextBlock Text="PARKING" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="13">
+                    <TextBox Text="0.00" Tag="Car"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 4-->
+                <Border Grid.Column="0" Grid.Row="14">
+                    <TextBlock Text="TOLL ROADS" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="14">
+                    <TextBox Text="0.00" Tag="Car"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 5-->
+                <Border Grid.Column="0" Grid.Row="15">
+                    <TextBlock Text="MAINTENANCE" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="15">
+                    <TextBox Text="0.00" Tag="Car"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 6-->
+                <Border Grid.Column="0" Grid.Row="16">
+                    <TextBlock Text="INSURANCE" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="16">
+                    <TextBox Text="0.00" Tag="Car"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--CAR TOTALS-->
+                <Border Grid.Column="0" Grid.Row="17">
+                    <TextBlock Text="TOTAL: "
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="17">
+                    <TextBlock x:Name="txtCarTotal" Text="0.00"
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                </Border>
+                
+                <!--Health Header Row-->
+                <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="18" BorderThickness="1" BorderBrush="Bisque">
+                    <TextBlock Text="HEALTH"
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Border>
+                
+                <!--Row 1-->
+                <Border Grid.Column="0" Grid.Row="19">
+                    <TextBlock Text="TREATMENT" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="19">
+                    <TextBox Text="0.00" Tag="Health"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 2-->
+                <Border Grid.Column="0" Grid.Row="20">
+                    <TextBlock Text="MEDICINE" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="20">
+                    <TextBox Text="0.00" Tag="Health"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 3-->
+                <Border Grid.Column="0" Grid.Row="21">
+                    <TextBlock Text="THERAPY" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="21">
+                    <TextBox Text="0.00" Tag="Health"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--Row 4-->
+                <Border Grid.Column="0" Grid.Row="22">
+                    <TextBlock Text="OTHER" Foreground="AliceBlue"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="22">
+                    <TextBox Text="0.00" Tag="Health"
+                             TextChanged="txtExpense_Changed"/>
+                </Border>
+                
+                <!--CAR TOTALS-->
+                <Border Grid.Column="0" Grid.Row="23">
+                    <TextBlock Text="TOTAL: "
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="23">
+                    <TextBlock x:Name="txtHealthTotal" Text="0.00"
+                               Foreground="AliceBlue"
+                               Padding="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                </Border>
+            </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="VARYING" IsSelected="False" FontFamily="Resources/Fonts/#Lexend">
+                    <Grid>
+                        
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            
+            <StackPanel Grid.Row="2" Orientation="Horizontal" >
+                <Button Content="Save" Margin="12" Padding="10,0"/>
+                <Button Content="Cancel" Margin="12" Padding="10,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
