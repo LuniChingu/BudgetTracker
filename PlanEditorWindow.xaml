@@ -319,8 +319,10 @@
             </TabControl>
             
             <StackPanel Grid.Row="2" Orientation="Horizontal" >
-                <Button Content="Save" Margin="12" Padding="10,0"/>
-                <Button Content="Cancel" Margin="12" Padding="10,0"/>
+                <Button Content="Save" Margin="12" Padding="10,0"
+                        Click="BtnSave_Click"/>
+                <Button Content="Cancel" Margin="12" Padding="10,0"
+                        Click="BtnCancel_Click"/>
             </StackPanel>
         </Grid>
     </Border>

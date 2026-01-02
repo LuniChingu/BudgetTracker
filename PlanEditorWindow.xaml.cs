@@ -33,4 +33,14 @@ public partial class PlanEditorWindow : Window
             .Where(textBox => textBox.Tag?.ToString() == categoryTag)
             .Sum(textBox => decimal.TryParse(textBox.Text, out var value) ? value : 0);
     }
+
+    private void BtnSave_Click(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void BtnCancel_Click(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }
