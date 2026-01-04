@@ -112,7 +112,6 @@ public partial class MainWindow
             MessageBox.Show("Income goal must be a number");
             textBox.Text = incomeGoal.ToString("F2");
         }
-        
         SaveData();
     }
 
@@ -148,7 +147,6 @@ public partial class MainWindow
         txtWantsPlan.Text = $"{wantsPlan:F2}";
         txtSavingsPlan.Text = $"{savingsPlan:F2}";
         txtTotalPlan.Text = $"{totalPlan:F2}";
-        
     }
 
     private readonly string[] needsCategories = ["Bills", "Transport", "Food"];
@@ -174,7 +172,7 @@ public partial class MainWindow
         txtSavingsActual.Text = $"{savingsActual:F2}";
         txtTotalActual.Text = $"{totalActual:F2}";
         
-        CalculateBudgetPercentages(needsActual, wantsActual, savingsActual, totalActual);
+        CalculateBudgetPercentages(needsActual, wantsActual, savingsActual);
     }
     #endregion
 
@@ -195,8 +193,7 @@ public partial class MainWindow
     #endregion
     
     #region percentage calculations
-    private void CalculateBudgetPercentages(decimal needsActual, decimal wantsActual, decimal savingsActual,
-        decimal totalActual)
+    private void CalculateBudgetPercentages(decimal needsActual, decimal wantsActual, decimal savingsActual)
     {
         var needsPercent = CalculatePercentage(needsActual, needsGoal);
         var wantsPercent = CalculatePercentage(wantsActual, wantsGoal);
