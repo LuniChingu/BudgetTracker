@@ -138,7 +138,6 @@ public partial class MainWindow
         
         totalPlan = needsPlan + wantsPlan + savingsPlan;
         
-        UpdatePlannedBudget();
         SaveData();
         CalculateActuals();
     }
@@ -189,6 +188,7 @@ public partial class MainWindow
         {
             var plannedNeedsTotal = planEditor.apartmentTotal + planEditor.carTotal + planEditor.healthTotal;
             needsPlan = plannedNeedsTotal;
+            UpdatePlannedBudget();
         }
     }
 
