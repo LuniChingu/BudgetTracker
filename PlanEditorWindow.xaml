@@ -27,7 +27,7 @@
                         
                         <Grid Grid.Row="0">
                             <StackPanel>
-                                <TextBlock Text="Planned Expenses"
+                                <TextBlock Text="Planned Fixed Expenses"
                                            Foreground="AliceBlue"
                                            FontSize="18"
                                            FontFamily="Resources/Fonts/#Lexend"
@@ -320,7 +320,20 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         
-                        <Button Grid.Row="0" Content="Add New" Margin="10" Width="200"></Button>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Text="Planned Varying Expenses"
+                                       Foreground="AliceBlue"
+                                       FontSize="18"
+                                       FontFamily="Resources/Fonts/#Lexend"
+                                       />
+                            <TextBlock Text="Fill in all ongoing subscriptions, installments, and other repeating expenses."
+                                       Foreground="AliceBlue"
+                                       FontSize="12"
+                                       FontFamily="Resources/Fonts/#Lexend"
+                                       
+                                       TextWrapping="WrapWithOverflow"/>
+                            <Button Grid.Row="0" Content="Add New" Margin="10" Width="200"/>
+                        </StackPanel>
                         <ScrollViewer Grid.Row="1">
                             <StackPanel x:Name="varyingExpenses">
                                 
