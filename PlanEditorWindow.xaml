@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
            
             <TabControl Grid.Row="1" BorderThickness="0" Background="Transparent">
-                <TabItem Header="FIXED" IsSelected="False" FontFamily="Resources/Fonts/#Lexend">
+                <TabItem Header="FIXED" IsSelected="True" FontFamily="Resources/Fonts/#Lexend">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -312,7 +312,7 @@
             </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="VARYING" IsSelected="True" FontFamily="Resources/Fonts/#Lexend">
+                <TabItem Header="VARYING" IsSelected="False" FontFamily="Resources/Fonts/#Lexend">
                     <Grid Margin="20,10,20,10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -326,19 +326,54 @@
                                        FontSize="18"
                                        FontFamily="Resources/Fonts/#Lexend"
                                        />
-                            <TextBlock Text="Fill in all ongoing subscriptions, installments, and other repeating expenses."
+                            <TextBlock Text="Fill in all ongoing subscriptions, installments, and other known repeating expenses."
                                        Foreground="AliceBlue"
                                        FontSize="12"
                                        FontFamily="Resources/Fonts/#Lexend"
                                        
                                        TextWrapping="WrapWithOverflow"/>
-                            <Button Grid.Row="0" Content="Add New" Margin="10" Width="200"/>
+                            <Button Grid.Row="0" Content="Add New" Margin="10" Width="200"
+                                    Click="BtnAddVaryingExpense_Click"/>
                         </StackPanel>
-                        <ScrollViewer Grid.Row="1">
-                            <StackPanel x:Name="varyingExpenses">
-                                
-                            </StackPanel>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Background="Blue">
+                            <ItemsControl x:Name="VaryingExpensesList" Background="Red">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <TextBox Grid.Column="0" Text="{Binding VarExpenseName, Mode = TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         d:DataContext="{d:DesignInstance }" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </ScrollViewer>
+                        <Border Grid.Row="2" Padding="10" Margin="10">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock x:Name="txtVaryingNeedsTotal" 
+                                           Text="Needs Total" 
+                                           Foreground="AliceBlue"
+                                           Margin="5, 0, 5, 0"/>
+                                <TextBlock x:Name="txtVaryingWantsTotal" 
+                                           Text="Wants Total" 
+                                           Foreground="AliceBlue"
+                                           Margin="5, 0, 5, 0"/>
+                                <TextBlock x:Name="txtVaryingSavingsTotal" 
+                                           Text="Savings Total"
+                                           Foreground="AliceBlue"
+                                           Margin="5, 0, 5, 0"/>
+                            </StackPanel>
+                        </Border>
                     </Grid>
                 </TabItem>
             </TabControl>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,9 @@ public partial class MainWindow
     private decimal savingsPlan;
     private decimal totalPlan;
     
+    //Month & Year Selector
+    private DateTime selectedMonth = DateTime.Today;
+    
     //Transactions stuff
     private ObservableCollection<Transaction> _transactions;
     private readonly string dataFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BudgetTracker", "AppData.json");
@@ -56,6 +60,8 @@ public partial class MainWindow
         LoadData();
         ShowDashboard();
         CalculateActuals();
+        
+        Console.WriteLine(txtIncomePlan.FontFamily.Source);
     }
 
     #region Upper Panel
@@ -66,6 +72,11 @@ public partial class MainWindow
     private void btnClose_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
+    }
+
+    private void btnMinimize_Click(object sender, RoutedEventArgs e)
+    {
+        WindowState =  WindowState.Minimized;
     }
     #endregion
     
@@ -133,17 +144,6 @@ public partial class MainWindow
     
     private void SavePlanBtn_Click(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(txtNeedsTotalPlan.Text) && string.IsNullOrWhiteSpace(txtWantsTotalPlan.Text) && string.IsNullOrWhiteSpace(txtSavingsTotalPlan.Text))
-        {
-            MessageBox.Show("Enter a number");
-            return;
-        }
-        
-        wantsPlan = decimal.Parse(txtWantsTotalPlan.Text);
-        savingsPlan = decimal.Parse(txtSavingsTotalPlan.Text);
-        
-        totalPlan = needsPlan + wantsPlan + savingsPlan;
-        
         SaveData();
         CalculateActuals();
     }
@@ -162,7 +162,7 @@ public partial class MainWindow
 
     private void CalculateActuals()
     {
-        var currentMonth = DateTime.Today;
+        var currentMonth = selectedMonth;
 
         var monthTransactions = _transactions
             .Where(t => t.Date.Month == currentMonth.Month &&

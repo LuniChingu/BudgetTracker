@@ -20,6 +20,14 @@
 
     <ItemGroup>
       <Resource Include="Resources\Fonts\Lexend-VariableFont_wght.ttf" />
+      <None Remove="Resources\Fonts\Lora-VariableFont_wght.ttf" />
+      <Resource Include="Resources\Fonts\Lora-VariableFont_wght.ttf" />
+      <None Remove="Resources\Fonts\Geom-VariableFont_wght.ttf" />
+      <Resource Include="Resources\Fonts\Geom-VariableFont_wght.ttf" />
+      <None Remove="Resources\Fonts\Lora-Italic-VariableFont_wght.ttf" />
+      <Resource Include="Resources\Fonts\Lora-Italic-VariableFont_wght.ttf" />
+      <None Remove="Resources\Fonts\Geom-Italic-VariableFont_wght.ttf" />
+      <Resource Include="Resources\Fonts\Geom-Italic-VariableFont_wght.ttf" />
     </ItemGroup>
 
 </Project>
