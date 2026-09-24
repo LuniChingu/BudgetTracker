@@ -25,6 +25,7 @@ public partial class DashboardViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(NeedsPercent))]
     [NotifyPropertyChangedFor(nameof(WantsPercent))]
     [NotifyPropertyChangedFor(nameof(SavingsPercent))]
+    [NotifyPropertyChangedFor(nameof(TotalPercent))]
     public partial decimal IncomeGoal { get; set; }
 
     public decimal NeedsGoal => IncomeGoal * 0.5m;
@@ -43,18 +44,19 @@ public partial class DashboardViewModel : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(WantsPercent))]
-    public partial decimal WantsActual { get; set; }
+    private decimal _wantsActual;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(SavingsPercent))]
-    public partial decimal SavingsActual { get; set; }
+    private decimal _savingsActual;
 
     public decimal TotalActual => NeedsActual + WantsActual + SavingsActual;
 
     public decimal NeedsPercent => Percent(NeedsActual);
     public decimal WantsPercent => Percent(WantsActual);
     public decimal SavingsPercent => Percent(SavingsActual);
+    public decimal TotalPercent => NeedsPercent + WantsPercent + SavingsPercent;
 
     private decimal Percent(decimal actual) => IncomeGoal == 0 ? 0 : actual / IncomeGoal;
 

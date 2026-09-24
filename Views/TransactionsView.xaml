@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="1000" d:DesignWidth="1000">
+             d:DesignHeight="1000" d:DesignWidth="687">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
                             
         <GroupBox Header="Add New Transaction" Grid.Row="0"
-                  Margin="10"
+                  Margin="10, 10, 10, 5"
                   Foreground="AliceBlue" 
                   Style="{StaticResource GenericGroupBox}">
             <Grid>
@@ -22,9 +22,10 @@
                 </Grid.RowDefinitions>
                                     
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <TextBlock Text="Transaction Name: " VerticalAlignment="Center"/>
+                    <TextBlock Text="Name: " VerticalAlignment="Center"/>
                     <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" 
-                             Margin="5,0,5,0" Height="25" Width="100"/>
+                             Margin="8,0,8,0" Height="25" Width="100"
+                             VerticalAlignment="Center"/>
                     <TextBlock Text="Date: " VerticalAlignment="Center"/>
                     <DatePicker Margin="5,0,5,0" Width="110" SelectedDate="{Binding NewDate}"/>
                     <TextBlock Text="Amount: " VerticalAlignment="Center"/>
@@ -36,13 +37,7 @@
                               ItemsSource="{Binding CategoryOptions}"
                               SelectedItem="{Binding NewCategory}"
                               Margin="5,0,5,0" Width="100"
-                              FontFamily="Resources/Fonts/#Lexend">
-                        <ComboBoxItem Content="Bills" IsSelected="True"/>
-                        <ComboBoxItem Content="Transport"/>
-                        <ComboBoxItem Content="Food"/>
-                        <ComboBoxItem Content="Shopping"/>
-                        <ComboBoxItem Content="Other"/>
-                    </ComboBox>
+                              FontFamily="Resources/Fonts/#Lexend"/>
                 </StackPanel>
                                     
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
@@ -55,7 +50,7 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Transactions" Grid.Row="1"
-                  Margin="10"
+                  Margin="10, 5, 10, 10"
                   Foreground="AliceBlue"
                   FontFamily="Resources/Fonts/#Lexend"
                   Style="{StaticResource GenericGroupBox}">

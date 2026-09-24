@@ -7,7 +7,7 @@
              xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d"
-             d:DesignHeight="1000" d:DesignWidth="1000"
+             d:DesignHeight="*" d:DesignWidth="*"
              Background="#1f1f24">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -133,7 +133,7 @@
             </Border>
             <Border Grid.Row="2" Grid.Column="4" BorderThickness="0,1,1,0"
                     Style="{StaticResource BudgetTableStrokeStyle}">
-                <TextBlock Text="%%"
+                <TextBlock Text="{Binding NeedsPercent, StringFormat=P0}"
                            Style="{StaticResource BudgetTableStyle}"/>
             </Border>
                             
@@ -160,7 +160,7 @@
             </Border>
             <Border Grid.Row="3" Grid.Column="4" BorderThickness="0,1,1,0"
                     Style="{StaticResource BudgetTableStrokeStyle}">
-                <TextBlock Text="%%"
+                <TextBlock Text="{Binding WantsPercent, StringFormat=P0}"
                            Style="{StaticResource BudgetTableStyle}"/>
             </Border>
                             
@@ -172,7 +172,7 @@
             </Border>
             <Border Grid.Row="4" Grid.Column="1" BorderThickness="0,1,1,0"
                     Style="{StaticResource BudgetTableStrokeStyle}">
-                <TextBlock Text="0.00"
+                <TextBlock Text="{Binding SavingsGoal, StringFormat=F2}"
                            Style="{StaticResource BudgetTableStyle}"/>
             </Border>
             <Border Grid.Row="4" Grid.Column="2" BorderThickness="0,1,1,0"
@@ -187,7 +187,7 @@
             </Border>
             <Border Grid.Row="4" Grid.Column="4" BorderThickness="0,1,1,0"
                     Style="{StaticResource BudgetTableStrokeStyle}">
-                <TextBlock Text="%%"
+                <TextBlock Text="{Binding SavingsPercent, StringFormat=P0}"
                            Style="{StaticResource BudgetTableStyle}"/>
             </Border>
                             
@@ -204,7 +204,7 @@
             <Border Grid.Row="5" Grid.Column="1" Background="#9b8fb0" 
                     BorderBrush="DarkSlateBlue"
                     BorderThickness="0,2,0,0">
-                <TextBlock Text="0.00"
+                <TextBlock Text="{Binding TotalGoal, StringFormat=F2}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontFamily="Resources/Fonts/#Geom"/>
@@ -229,7 +229,7 @@
                     BorderBrush="DarkSlateBlue"
                     BorderThickness="0,2,0,0"
                     CornerRadius="0,0,5,0">
-                <TextBlock Text="N+W+S"
+                <TextBlock Text="{Binding TotalPercent, StringFormat=P0}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontFamily="Resources/Fonts/#Geom"/>

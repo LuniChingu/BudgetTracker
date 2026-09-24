@@ -20,7 +20,7 @@ public partial class TransactionsViewModel(DataStore store) : ObservableObject
     
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddCommand))]
-    private string _newName = "New Name";
+    private string _newName = "Transaction Name";
     
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddCommand))]

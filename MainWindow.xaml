@@ -92,7 +92,6 @@
                     <RadioButton Margin="5,5,5,5" 
                                  Style="{StaticResource SideMenuRadioButton}"
                                  GroupName="MenuNav"
-                                 Command="{Binding ShowTransactionsCommand}"
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
                             <sharp:IconImage Icon="Chain"
@@ -110,6 +109,7 @@
                     <RadioButton Margin="5,5,5,5"
                                  GroupName="MenuNav"
                                  Style="{StaticResource SideMenuRadioButton}"
+                                 Command="{Binding ShowTransactionsCommand}"
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
                             <sharp:IconImage Icon="MoneyBillTransfer"
@@ -186,98 +186,6 @@
                     <ContentControl Content="{Binding CurrentViewModel}"
                                     Grid.Row="1"
                                     Margin="10"/>
-                    <Grid Grid.Row="1">
-                        
-                        <!--Dashboard view-->
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="425"/>
-                            <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="245"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            
-                            <!--Planned Spending form-->
-                            <Grid Grid.Row="1" Grid.Column="1">
-                                <Button x:Name="SavePlanBtn" Content="Update" 
-                                        Width="60" Margin="5,5,5,2"
-                                        Style="{StaticResource GenericBtn}"
-                                        FontFamily="Resources/Fonts/#Lexend"
-                                        Click="SavePlanBtn_Click"/>
-                            </Grid>
-                        </Grid>
-                        
-                        <!--Transactions view-->
-                        <Grid x:Name="transactionsView" Visibility="Collapsed">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            
-                            <GroupBox Header="Add New Transaction" Grid.Row="0"
-                                       Margin="10"
-                                      Foreground="AliceBlue" 
-                                      Style="{StaticResource GenericGroupBox}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    
-                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                        <TextBlock Text="Transaction Name: " VerticalAlignment="Center"/>
-                                        <TextBox x:Name="txtName" Text="Add name" Margin="5,0,5,0" Height="25" Width="100"/>
-                                        <TextBlock Text="Date: " VerticalAlignment="Center"/>
-                                        <DatePicker x:Name="dpDate" Margin="5,0,5,0" Width="110"/>
-                                        <TextBlock Text="Amount: " VerticalAlignment="Center"/>
-                                        <TextBox x:Name="txtAmount" Text="0.00" Margin="5,0,5,0" Width="100"/>
-                                        <TextBlock Text="Category: " VerticalAlignment="Center"/>
-                                        <ComboBox x:Name="cmbCategory"
-                                                  Style="{StaticResource RoundedComboBoxStyle}"
-                                                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-                                                  Margin="5,0,5,0" Width="100"
-                                                  FontFamily="Resources/Fonts/#Lexend">
-                                            <ComboBoxItem Content="Bills" IsSelected="True"/>
-                                            <ComboBoxItem Content="Transport"/>
-                                            <ComboBoxItem Content="Food"/>
-                                            <ComboBoxItem Content="Shopping"/>
-                                            <ComboBoxItem Content="Other"/>
-                                        </ComboBox>
-                                    </StackPanel>
-                                    
-                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                                        <Button x:Name="BtnAddClick" Content="Add Transaction" Padding="5,0" 
-                                                Style="{StaticResource GenericBtn}" FontFamily="Resources/Fonts/#Lexend"
-                                                Click="BtnAdd_Click"/>
-                                    </StackPanel>
-                                </Grid>
-                            </GroupBox>
-                            <GroupBox Header="Transactions" Grid.Row="1"
-                                      Margin="10"
-                                      Foreground="AliceBlue"
-                                      FontFamily="Resources/Fonts/#Lexend"
-                                      Style="{StaticResource GenericGroupBox}">
-                                <DataGrid x:Name="dgTransactions"
-                                          AutoGenerateColumns="False"
-                                          GridLinesVisibility="Horizontal"
-                                          Style="{DynamicResource TransactionsStyle}"
-                                          FontFamily="Resources/Fonts/#Lexend"
-                                          CanUserAddRows="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="NAME" Binding="{Binding Name}" Width="*"/>
-                                        <DataGridTextColumn Header="DATE" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
-                                        <DataGridTextColumn Header="AMOUNT" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
-                                        <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="120"/>
-                                    </DataGrid.Columns>
-                                    
-                                </DataGrid>
-                            </GroupBox>
-                        </Grid>
-                    </Grid>
                 </Grid>
             </Border>    
         </Grid>
