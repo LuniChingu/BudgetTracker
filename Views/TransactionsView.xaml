@@ -55,13 +55,14 @@
                   FontFamily="Resources/Fonts/#Lexend"
                   Style="{StaticResource GenericGroupBox}">
             <DataGrid x:Name="dgTransactions"
+                      ItemsSource="{Binding Transactions}"
                       AutoGenerateColumns="False"
                       GridLinesVisibility="Horizontal"
                       Style="{DynamicResource TransactionsStyle}"
                       FontFamily="Resources/Fonts/#Lexend"
                       CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="NAME" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="NAME" Binding="{Binding TransactionName}" Width="*"/>
                     <DataGridTextColumn Header="DATE" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
                     <DataGridTextColumn Header="AMOUNT" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
                     <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="120"/>

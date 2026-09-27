@@ -61,7 +61,7 @@ public partial class DashboardViewModel : ObservableObject
     private decimal Percent(decimal actual) => IncomeGoal == 0 ? 0 : actual / IncomeGoal;
 
     [ObservableProperty]
-    public partial ISeries[] Series { get; set; } = [];
+    public partial ISeries[] BudgetTrendSeries { get; set; } = [];
 
     public DashboardViewModel(DataStore store)
     {
@@ -122,7 +122,7 @@ public partial class DashboardViewModel : ObservableObject
         WantsActual   = month.Where(t => Categories.Wants.Contains(t.Category)).Sum(t => t.Amount);
         SavingsActual = month.Where(t => Categories.Savings.Contains(t.Category)).Sum(t => t.Amount);
 
-        Series =
+        BudgetTrendSeries =
         [
             MakeSlice("Needs", NeedsActual, "#85baff"),
             MakeSlice("Wants", WantsActual, "#2f4a9c"),
