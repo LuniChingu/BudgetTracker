@@ -223,6 +223,40 @@
         </Setter>
     </Style>
     
+    <!--Progress Bar -->
+    <Style x:Key="RoundedLinearProgressBarStyle" TargetType="ProgressBar">
+        <Setter Property="Foreground" Value="Navy"/>
+        <Setter Property="Background" Value="Pink"/>
+        <Setter Property="Height" Value="9"/>
+        <Setter Property="Margin" Value="0,8, 5, 9"></Setter>
+        <Setter Property="IsIndeterminate" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="LayoutRoot">
+                        <Grid.Resources>
+                            <Storyboard x:Key="IndeterminateProgressBarIndicatorStoryboard"/>
+                        </Grid.Resources>
+
+                        <!-- Track -->
+                        <Rectangle x:Name="ProgressBarTrack"
+                                   Fill="{TemplateBinding Background}"
+                                   RadiusX="4"
+                                   RadiusY="4"
+                                   HorizontalAlignment="Stretch"/>
+
+                        <!-- Fill -->
+                        <Rectangle x:Name="ProgressBarIndicator"
+                                   Fill="{TemplateBinding Foreground}"
+                                   RadiusX="4"
+                                   RadiusY="4"
+                                   HorizontalAlignment="Left"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!-- Budget Table Style -->
     <Style x:Key="BudgetTableStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Resources/Fonts/#Geom"/>
