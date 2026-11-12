@@ -11,6 +11,23 @@
         <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
     
+    <!-- Month Title Text-->
+    <Style x:Key="MonthTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Resources/Fonts/#Lora"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="CornflowerBlue" Offset="0"/>
+                    <GradientStop Color="#8460b3" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--Budget Table-->
     <Style x:Key="BudgetTableTitle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Resources/Fonts/#Geom"/>
@@ -28,4 +45,5 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="AliceBlue"/>
     </Style>
+    
 </ResourceDictionary>

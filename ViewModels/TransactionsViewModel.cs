@@ -18,7 +18,7 @@ public partial class TransactionsViewModel(DataStore store) : ObservableObject
     
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddCommand))]
-    private string _newName = "Transaction Name";
+    private string _newName = "New transaction";
     
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddCommand))]
@@ -43,7 +43,7 @@ public partial class TransactionsViewModel(DataStore store) : ObservableObject
 
         store.Save();
         
-        NewName = "New Name";
+        NewName = "New transaction";
         NewAmount = null;
         NewDate = DateTime.Today;
         NewCategory = Categories.All[0];

@@ -150,13 +150,8 @@
                                        FontWeight="Bold"
                                        FontFamily="Resources/Fonts/#Lora"/>
                             <TextBlock Text="August" 
-                                       FontSize="32"
-                                       Foreground="CornflowerBlue" 
                                        Margin="5,5,0,0"
-                                       VerticalAlignment="Bottom"
-                                       FontStyle="Italic"
-                                       FontWeight="Bold"
-                                       FontFamily="Resources/Fonts/#Lora"/>
+                                       Style="{StaticResource MonthTitle}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <sharp:IconImage Icon="Wallet"

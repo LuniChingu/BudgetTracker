@@ -7,6 +7,7 @@
                 <ResourceDictionary Source="/Styles/UIColors.xaml"/>
                 <ResourceDictionary Source="/Styles/Controls/IconStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Controls/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/Controls/TextBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <FontFamily x:Key="ContentControlThemeFontFamily">ms-appx:///Resources/Fonts/Geom.ttf#Geom</FontFamily>

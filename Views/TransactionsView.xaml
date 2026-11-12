@@ -24,13 +24,15 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                     <TextBlock Text="Name: " VerticalAlignment="Center"/>
                     <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" 
-                             Margin="8,0,8,0" Height="25" Width="100"
-                             VerticalAlignment="Center"/>
+                             Margin="8,0,8,0" Height="20" Width="100"
+                             VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                             Style="{StaticResource GenericField}"/>
                     <TextBlock Text="Date: " VerticalAlignment="Center"/>
                     <DatePicker Margin="5,0,5,0" Width="110" SelectedDate="{Binding NewDate}"/>
                     <TextBlock Text="Amount: " VerticalAlignment="Center"/>
                     <TextBox Text="{Binding NewAmount, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
-                             Margin="5,0,5,0" Width="100"/>
+                             Margin="5,0,5,0" Width="100"
+                             Style="{StaticResource GenericField}"/>
                     <TextBlock Text="Category: " VerticalAlignment="Center"/>
                     <ComboBox Style="{StaticResource RoundedComboBoxStyle}"
                               ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
