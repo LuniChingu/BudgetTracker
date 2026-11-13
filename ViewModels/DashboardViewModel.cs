@@ -24,29 +24,29 @@ public partial class DashboardViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(WantsPercent))]
     [NotifyPropertyChangedFor(nameof(SavingsPercent))]
     [NotifyPropertyChangedFor(nameof(TotalPercent))]
-    private partial decimal IncomeGoal { get; set; }
+    public partial decimal IncomeGoal { get; set; }
 
     public decimal NeedsGoal => IncomeGoal * 0.5m;
     public decimal WantsGoal => IncomeGoal * 0.3m;
     public decimal SavingsGoal => IncomeGoal * 0.2m;
     public decimal TotalGoal => NeedsGoal + WantsGoal + SavingsGoal;
 
-    [ObservableProperty] private partial DateTime SelectedMonth { get; set; } = DateTime.Today;
+    [ObservableProperty] public partial DateTime SelectedMonth { get; set; } = DateTime.Today;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(NeedsPercent))]
-    private partial decimal NeedsActual { get; set; }
+    private decimal _needsActual;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(WantsPercent))]
-    private partial decimal WantsActual { get; set; }
+    private decimal _WantsActual;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(SavingsPercent))]
-    private partial decimal SavingsActual { get; set; }
+    private decimal _SavingsActual;
 
     public decimal TotalActual => NeedsActual + WantsActual + SavingsActual;
 

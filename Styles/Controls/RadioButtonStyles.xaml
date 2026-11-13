@@ -24,12 +24,12 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="AliceBlue"/>
+                            <Setter Property="Foreground" Value="#F5F1EA"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="border" Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="AliceBlue"/>
+                            <Setter Property="Foreground" Value="#F5F1EA"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

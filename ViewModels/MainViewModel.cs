@@ -9,13 +9,13 @@ public partial class MainViewModel : ObservableObject
     private readonly TransactionsViewModel _transactions;
 
     [ObservableProperty]
-    public partial object CurrentViewModel { get; set; }
+    private object _currentViewModel;
 
     public MainViewModel(DashboardViewModel dashboard, TransactionsViewModel transactions)
     {
         _dashboard = dashboard;
         _transactions = transactions;
-        CurrentViewModel = dashboard;
+        _currentViewModel = dashboard;
     }
     
     [RelayCommand] private void ShowDashboard() => CurrentViewModel =  _dashboard;

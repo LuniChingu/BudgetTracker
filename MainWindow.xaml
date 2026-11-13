@@ -93,7 +93,7 @@
                                  Command="{Binding ShowDashboardCommand}">
                         <StackPanel Orientation="Horizontal">
                             <sharp:IconImage Icon="House"
-                                             Foreground="AliceBlue"
+                                             Foreground="#F5F1EA"
                                              Width="22"
                                              Height="22"
                                              Margin="0,0,10,0"
@@ -109,7 +109,7 @@
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
                             <sharp:IconImage Icon="Chain"
-                                             Foreground="AliceBlue"
+                                             Foreground="#F5F1EA"
                                              Width="22"
                                              Height="22"
                                              Margin="0,0,10,0"
@@ -125,8 +125,8 @@
                                  Command="{Binding ShowTransactionsCommand}"
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
-                            <sharp:IconImage Icon="MoneyBillTransfer"
-                                             Foreground="AliceBlue"
+                            <sharp:IconImage Icon="ArrowRightArrowLeft"
+                                             Foreground="#F5F1EA"
                                              Width="22"
                                              Height="22"
                                              Margin="0,0,10,0"
