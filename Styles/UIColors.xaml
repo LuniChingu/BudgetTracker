@@ -31,40 +31,6 @@
         <Setter Property="Height" Value="9"/>
     </Style>
     
-    <!--Radio Button as Side Menu tab select-->
-    <Style x:Key="SideMenuRadioButton" TargetType="RadioButton">
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Foreground" Value="AliceBlue"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="border"
-                            Background="DarkSlateBlue"
-                            BorderThickness="0"
-                            CornerRadius="8">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="border" Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="AliceBlue"/>
-                            <Setter Property="FontWeight" Value="Regular"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="DarkSlateGray"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="CornflowerBlue"/>
-                            <Setter Property="Foreground" Value="AliceBlue"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Trigger>
-                        
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
     <!--Generic Button Style-->
     <Style x:Key="GenericBtn" TargetType="Button">
         <Setter Property="Background" Value="DarkSlateBlue"/>

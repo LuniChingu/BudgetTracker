@@ -4,9 +4,16 @@ namespace BudgetTracker.Models;
 
 public partial class Transaction : ObservableObject
 {
-    [ObservableProperty] private string? _transactionName;
-    [ObservableProperty] private DateTime _date = DateTime.Today;
-    [ObservableProperty] private decimal _amount;
-    [ObservableProperty] private string? _category;
+    [ObservableProperty]
+    public partial string? TransactionName { get; set; }
+
+    [ObservableProperty]
+    public partial DateTime Date { get; set; } = DateTime.Today;
+
+    [ObservableProperty]
+    public partial decimal Amount { get; set; }
+
+    [ObservableProperty]
+    public partial string? Category { get; set; }
     //public string? Currency { get; set; }
 }

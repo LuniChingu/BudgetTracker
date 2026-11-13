@@ -11,24 +11,24 @@ public partial class TransactionsViewModel(DataStore store) : ObservableObject
     public ObservableCollection<Transaction> Transactions => store.Transactions;
 
     public string[] CategoryOptions => Categories.All;
-    
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(DeleteCommand))]
-    private Transaction? _selectedTransaction;
-    
+    public partial Transaction? SelectedTransaction { get; set; }
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddCommand))]
     private string _newName = "New transaction";
-    
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddCommand))]
-    private decimal? _newAmount;
-    
+    public partial decimal? NewAmount { get; set; }
+
     [ObservableProperty]
     private DateTime _newDate = DateTime.Today;
 
     [ObservableProperty]
-    private string _newCategory = Categories.All[0];
+    public partial string NewCategory { get; set; } = Categories.All[0];
 
     [RelayCommand(CanExecute = nameof(canAdd))]
     private void Add()

@@ -3,9 +3,7 @@ using System.ComponentModel;
 using BudgetTracker.Services;
 using BudgetTracker.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
-using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
@@ -26,30 +24,29 @@ public partial class DashboardViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(WantsPercent))]
     [NotifyPropertyChangedFor(nameof(SavingsPercent))]
     [NotifyPropertyChangedFor(nameof(TotalPercent))]
-    public partial decimal IncomeGoal { get; set; }
+    private partial decimal IncomeGoal { get; set; }
 
     public decimal NeedsGoal => IncomeGoal * 0.5m;
     public decimal WantsGoal => IncomeGoal * 0.3m;
     public decimal SavingsGoal => IncomeGoal * 0.2m;
     public decimal TotalGoal => NeedsGoal + WantsGoal + SavingsGoal;
 
-    [ObservableProperty]
-    public partial DateTime SelectedMonth { get; set; } = DateTime.Today;
+    [ObservableProperty] private partial DateTime SelectedMonth { get; set; } = DateTime.Today;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(NeedsPercent))]
-    private decimal _needsActual;
+    private partial decimal NeedsActual { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(WantsPercent))]
-    private decimal _wantsActual;
+    private partial decimal WantsActual { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalActual))]
     [NotifyPropertyChangedFor(nameof(SavingsPercent))]
-    private decimal _savingsActual;
+    private partial decimal SavingsActual { get; set; }
 
     public decimal TotalActual => NeedsActual + WantsActual + SavingsActual;
 
@@ -124,9 +121,9 @@ public partial class DashboardViewModel : ObservableObject
 
         BudgetTrendSeries =
         [
-            MakeSlice("Needs", NeedsActual, "#85baff"),
-            MakeSlice("Wants", WantsActual, "#2f4a9c"),
-            MakeSlice("Savings", SavingsActual, "#1b2047")
+            MakeSlice("Needs", NeedsActual, "#b09bba"),
+            MakeSlice("Wants", WantsActual, "#a6ad9d"),
+            MakeSlice("Savings", SavingsActual, "#dca28e")
         ];
     }
 
@@ -135,12 +132,8 @@ public partial class DashboardViewModel : ObservableObject
         Name = name,
         Values = [(double)value],
         Fill = new SolidColorPaint(SKColor.Parse(hexColor)),
-        MaxRadialColumnWidth = 40,
         OuterRadiusOffset = 0,
-        
-        ShowDataLabels = true,
-        DataLabelsSize = 12,
-        DataLabelsPaint = new SolidColorPaint(SKColors.AliceBlue),
-        DataLabelsFormatter = p => $"{name}:\n{p.StackedValue!.Share:P0}"
+        InnerRadius = 115,
+        CornerRadius = 10,
     };
 }

@@ -3,10 +3,10 @@
                     xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
     
     <Style x:Key="CategoryIcon" TargetType="sharp:IconImage">
-        <Setter Property="Width" Value="18"/>
-        <Setter Property="Height" Value="18"/>
-        <Setter Property="Margin" Value="8,4"/>
-        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#393647"/>
     </Style>
     
 </ResourceDictionary>

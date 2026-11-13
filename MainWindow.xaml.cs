@@ -1,13 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.IO;
-using LiveChartsCore;
-using BudgetTracker.Models;
 
 //TODO: calculate percentages correctly (category / income = %%)
-//TODO: add color coding based on percentages
 //TODO: add fields to fill in planned income and actual income
 //TODO: make adding a transaction also a separate window or popup + add ability to delete rows from the data grid (editing is already possible since the data grid is not readonly)
 //TODO: add an ability to pick a month to see in the dashboard (default is current month) + add ability to save the month's view into some sort of document?
@@ -40,25 +34,11 @@ public partial class MainWindow
     }
     #endregion
 
-    #region Budget Table colculations
+    #region Budget Table calculations
 
     private readonly string[] needsCategories = ["Bills", "Transport", "Food"];
     private readonly string[] wantsCategories = ["Shopping"];
     private readonly  string[] savingsCategories = ["Other"];
     
-    #endregion
-
-    #region plans form window open
-
-    private void btnEditPlan_Click(object sender, RoutedEventArgs e)
-    {
-        var planEditor = new PlanEditorWindow();
-
-        if (planEditor.ShowDialog() == true)
-        {
-            var plannedNeedsTotal = planEditor.apartmentTotal + planEditor.carTotal + planEditor.healthTotal;
-        }
-    }
-
     #endregion
 }

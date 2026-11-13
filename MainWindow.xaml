@@ -4,14 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         xmlns:vm="clr-namespace:BudgetTracker.ViewModels"
         xmlns:views="clr-namespace:BudgetTracker.Views"
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        Title="MainWindow" Height="600" Width="920">
+        Title="MainWindow" Height="900" Width="1400">
     
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
@@ -22,17 +21,31 @@
         </DataTemplate>
     </Window.Resources>
     
-    <Border Background="#1f1f24"
+    <Border Background="#393647"
             CornerRadius="20">
         
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
+            <!--Top bar-->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Cashual."
+                           Margin="50,5,0,0"
+                           FontFamily="Resources/Fonts/#Geom"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="AliceBlue"/>
+            
             <!--Control Bar-->
-            <StackPanel x:Name="pnlControlBar" Grid.Row="0"
+            <StackPanel x:Name="pnlControlBar" Grid.Column="1"
                         Orientation="Horizontal" FlowDirection="RightToLeft"
                         Margin="0,0,10,0"
                         Background="Transparent"
@@ -55,6 +68,8 @@
                 </Button>
             </StackPanel>
             
+            </Grid>
+            
             <!--Main Content-->
             <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -63,17 +78,17 @@
             </Grid.ColumnDefinitions>
                 
             <!--Side Panel-->
-            <Border Grid.Column="0" CornerRadius="10,0,0,10">
+            <Border Grid.Column="0" CornerRadius="10,0,0,10"
+                    Margin="0, 60, 0, 0">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.6">
-                        <GradientStop Color="#1f1f24" Offset="0"/>
-                        <GradientStop Color="#141414" Offset="1"/>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="1,1">
+                        <GradientStop Color="#393647" Offset="0"/>
+                        <GradientStop Color="#8178A5" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
                 <StackPanel>
                     <RadioButton Style="{StaticResource SideMenuRadioButton}"
                                  GroupName="MenuNav"
-                                 Margin="5,10,5,5" 
                                  IsChecked="True"
                                  Command="{Binding ShowDashboardCommand}">
                         <StackPanel Orientation="Horizontal">
@@ -89,8 +104,7 @@
                                        Text="Dashboard"/>
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Margin="5,5,5,5" 
-                                 Style="{StaticResource SideMenuRadioButton}"
+                    <RadioButton Style="{StaticResource SideMenuRadioButton}"
                                  GroupName="MenuNav"
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
@@ -106,8 +120,7 @@
                                        Text="Commitments"/>
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Margin="5,5,5,5"
-                                 GroupName="MenuNav"
+                    <RadioButton GroupName="MenuNav"
                                  Style="{StaticResource SideMenuRadioButton}"
                                  Command="{Binding ShowTransactionsCommand}"
                                  FontFamily="Resources/Fonts/#Geom">
@@ -132,11 +145,11 @@
                 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0" Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="200"/>
@@ -156,8 +169,8 @@
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <sharp:IconImage Icon="Wallet"
                                              Foreground="CornflowerBlue"
-                                             Width="25"
-                                             Height="25"
+                                             Width="28"
+                                             Height="28"
                                              VerticalAlignment="Center"
                                              Style="{StaticResource BarButtonIcon}"/>
                             <StackPanel Orientation="Vertical">
@@ -178,9 +191,13 @@
                     </Grid>
                     
                     <!--Content Section / Child Views-->
+                    <Border Grid.Row="1"
+                            Background="#D5D1CB"
+                            CornerRadius="0, 0, 20, 0">
                     <ContentControl Content="{Binding CurrentViewModel}"
-                                    Grid.Row="1"
-                                    Margin="10"/>
+                                    Margin="10"
+                                    Foreground="#D5D1CB"/>
+                    </Border>
                 </Grid>
             </Border>    
         </Grid>
