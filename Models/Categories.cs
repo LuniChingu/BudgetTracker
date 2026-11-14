@@ -7,4 +7,5 @@ public static class Categories
     public static readonly string[] Savings = ["Savings", "Emergency", "Debt", "Other"];
 
     public static readonly string[] All = [.. Needs, .. Wants, .. Savings];
+    public const string Default = "Miscellaneous";
 }

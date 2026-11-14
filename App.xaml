@@ -10,6 +10,8 @@
                 <ResourceDictionary Source="/Styles/Controls/TextBoxStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Controls/RadioButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Controls/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/Controls/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="Styles/Controls/ComboBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <FontFamily x:Key="ContentControlThemeFontFamily">ms-appx:///Resources/Fonts/Geom.ttf#Geom</FontFamily>

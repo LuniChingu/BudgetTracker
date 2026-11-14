@@ -20,7 +20,7 @@
         <Setter Property="Width" Value="18"/>
         <Setter Property="Height" Value="18"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="#393647"/>
+        <Setter Property="Foreground" Value="#E8E2DC"/>
     </Style>
     
 </ResourceDictionary>
