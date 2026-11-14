@@ -31,15 +31,41 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 
-                    <TextBlock Text="Quick Look"
-                        FontFamily="Resources/Fonts/#Geom"
-                        FontSize="20"
-                        FontWeight="Medium"
-                        Foreground="#31223d"
-                        VerticalAlignment="Bottom"
-                        Margin="0,0,0,8"
-                        />
-        
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0" Text="Quick Look"
+                               FontFamily="Resources/Fonts/#Geom"
+                               FontSize="20"
+                               FontWeight="Medium"
+                               Foreground="#31223d"
+                               VerticalAlignment="Bottom"
+                               Margin="0,0,0,8"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Style="{StaticResource MonthNavButtonStyle}"
+                                Command="{Binding PreviousMonthCommand}">
+                            <sharp:IconImage Grid.Row="0" Grid.Column="0" Icon="AngleLeft"
+                                             Style="{StaticResource NavigationIcon}"/>
+                        </Button>
+                        <TextBlock Text="{Binding SelectedMonth, StringFormat='MMMM yyyy'}"
+                                   FontFamily="Resources/Fonts/#Geom"
+                                   FontSize="16"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   Foreground="#31223d"
+                                   Margin="5"/>
+                        <Button Style="{StaticResource MonthNavButtonStyle}"
+                                Command="{Binding NextMonthCommand}">
+                            <sharp:IconImage Grid.Row="0" Grid.Column="0" Icon="AngleRight"
+                                             Style="{StaticResource NavigationIcon}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
         <!--Budget Table-->
             <Grid Grid.Row="1">
                             
@@ -100,22 +126,20 @@
                 </Border>
                 <Border Grid.Row="1" Grid.Column="1" Background="#d7c8d9"
                     BorderBrush="#aaa5ae" BorderThickness="1,0,0,0">
-                    <TextBox Text="{Binding IncomeGoal, UpdateSourceTrigger=LostFocus}"
+                    <TextBox Text="{Binding IncomeGoal, StringFormat=F2 , UpdateSourceTrigger=LostFocus}"
                              Style="{StaticResource BudgetTableFieldStyle}"
-                             Background="Transparent"
-                             BorderThickness="0"
                              Height="Auto"
                              Width="Auto"/>
                 </Border>
                 <Border Grid.Row="1" Grid.Column="2" Background="#d7c8d9" 
                         BorderBrush="#aaa5ae" BorderThickness="1,0,0,0">
-                    <TextBlock Text="user input" 
-                           Style="{StaticResource BudgetTableStyle}"/>
+                    <TextBox Text="{Binding IncomePlan, StringFormat=F2 , UpdateSourceTrigger=LostFocus}" 
+                           Style="{StaticResource BudgetTableFieldStyle}"/>
                 </Border>
                 <Border Grid.Row="1" Grid.Column="3" Background="#d7c8d9" 
                         BorderBrush="#aaa5ae" BorderThickness="1,0,0,0">
-                    <TextBlock Text="user input"
-                           Style="{StaticResource BudgetTableStyle}"/>
+                    <TextBox Text="{Binding IncomeActual, StringFormat=F2 , UpdateSourceTrigger=LostFocus}"
+                           Style="{StaticResource BudgetTableFieldStyle}"/>
                 </Border>
                 <Border Grid.Row="1" Grid.Column="4" Background="#d7c8d9" 
                         BorderBrush="#aaa5ae" BorderThickness="1,0,0,0">

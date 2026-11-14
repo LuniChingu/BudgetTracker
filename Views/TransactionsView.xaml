@@ -3,74 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
-             d:DesignHeight="1000" d:DesignWidth="687">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-                            
-        <GroupBox Header="Add New Transaction" Grid.Row="0"
-                  Margin="10, 10, 10, 5"
-                  Foreground="AliceBlue" 
-                  Style="{StaticResource GenericGroupBox}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                                    
-                <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <TextBlock Text="Name: " VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" 
-                             Margin="8,0,8,0" Height="20" Width="100"
-                             VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                             Style="{StaticResource GenericField}"/>
-                    <TextBlock Text="Date: " VerticalAlignment="Center"/>
-                    <DatePicker Margin="5,0,5,0" Width="110" SelectedDate="{Binding NewDate}"/>
-                    <TextBlock Text="Amount: " VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding NewAmount, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
-                             Margin="5,0,5,0" Width="100"
-                             Style="{StaticResource GenericField}"/>
-                    <TextBlock Text="Category: " VerticalAlignment="Center"/>
-                    <ComboBox Style="{StaticResource RoundedComboBoxStyle}"
-                              ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-                              ItemsSource="{Binding CategoryOptions}"
-                              SelectedItem="{Binding NewCategory}"
-                              Margin="5,0,5,0" Width="100"
-                              FontFamily="Resources/Fonts/#Lexend"/>
-                </StackPanel>
-                                    
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                    <Button Content="Add Transaction"
-                            Command="{Binding AddCommand}"
-                            Padding="5,0" 
-                            Style="{StaticResource GenericBtn}"
-                            FontFamily="Resources/Fonts/#Geom"/>
+             d:DesignHeight="*" d:DesignWidth="*"
+             Background="Transparent">
+    <Border Background="#E8E2DC" Margin="10"
+            CornerRadius="20"
+            Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Transactions"
+                           FontFamily="Resources/Fonts/#Geom"
+                           FontSize="32"
+                           FontWeight="DemiBold"
+                           Foreground="#31223d"
+                           Margin="10"/>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Style="{StaticResource MonthNavButtonStyle}"
+                            Command="{Binding PreviousMonthCommand}">
+                        <fa:IconImage Grid.Row="0" Grid.Column="0" Icon="Plus"
+                                         Style="{StaticResource ButtonIcon}"/>
+                    </Button>
+                    <Button Style="{StaticResource MonthNavButtonStyle}"
+                            Command="{Binding PreviousMonthCommand}">
+                        <fa:IconImage Grid.Row="0" Grid.Column="0" Icon="Filter"
+                                      Style="{StaticResource ButtonIcon}"/>
+                    </Button>
+                    <Button Style="{StaticResource MonthNavButtonStyle}"
+                            Command="{Binding PreviousMonthCommand}">
+                        <fa:IconImage Grid.Row="0" Grid.Column="0" Icon="SquareCheck"
+                                      Style="{StaticResource ButtonIcon}"/>
+                    </Button>
                 </StackPanel>
             </Grid>
-        </GroupBox>
-        <GroupBox Header="Transactions" Grid.Row="1"
-                  Margin="10, 5, 10, 10"
-                  Foreground="AliceBlue"
-                  FontFamily="Resources/Fonts/#Lexend"
-                  Style="{StaticResource GenericGroupBox}">
-            <DataGrid x:Name="dgTransactions"
+        
+            
+                <DataGrid Grid.Row="1"
                       ItemsSource="{Binding Transactions}"
                       AutoGenerateColumns="False"
                       GridLinesVisibility="Horizontal"
                       Style="{DynamicResource TransactionsStyle}"
-                      FontFamily="Resources/Fonts/#Lexend"
+                      FontFamily="Resources/Fonts/#Geom"
                       CanUserAddRows="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="NAME" Binding="{Binding TransactionName}" Width="*"/>
-                    <DataGridTextColumn Header="DATE" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
-                    <DataGridTextColumn Header="AMOUNT" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
-                    <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="120"/>
-                </DataGrid.Columns>
-                                    
-            </DataGrid>
-        </GroupBox>
-    </Grid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="NAME" Binding="{Binding TransactionName}" Width="*"/>
+                        <DataGridTextColumn Header="DATE" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
+                        <DataGridTextColumn Header="AMOUNT" Binding="{Binding Amount, StringFormat='${0:F2}'}" Width="100"/>
+                        <DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+        </Grid>
+    </Border>
 </UserControl>

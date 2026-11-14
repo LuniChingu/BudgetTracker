@@ -9,4 +9,18 @@
         <Setter Property="Foreground" Value="#393647"/>
     </Style>
     
+    <Style x:Key="NavigationIcon" TargetType="sharp:IconImage">
+        <Setter Property="Width" Value="14"/>
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#393647"/>
+    </Style>
+    
+    <Style x:Key="ButtonIcon" TargetType="sharp:IconImage">
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#393647"/>
+    </Style>
+    
 </ResourceDictionary>

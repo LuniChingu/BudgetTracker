@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="/Styles/Controls/TextBlockStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Controls/TextBoxStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Controls/RadioButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/Controls/ButtonStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <FontFamily x:Key="ContentControlThemeFontFamily">ms-appx:///Resources/Fonts/Geom.ttf#Geom</FontFamily>

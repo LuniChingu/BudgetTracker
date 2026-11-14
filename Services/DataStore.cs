@@ -5,21 +5,51 @@ using BudgetTracker.Models;
 
 namespace BudgetTracker.Services;
 
-
 public class DataStore
 {
+    #region Fields
     private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions { WriteIndented = true };
     private readonly string dataFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BudgetTracker", "AppData.json");
-
+    private const decimal DefaultIncomeGoal = 10000m;
+    #endregion
+    
+    #region Data
     public ObservableCollection<Transaction> Transactions { get; } = [];
-    public decimal IncomeGoal { get; set; } = 1500m;
+    public List<MonthlyBudget>  MonthlyBudgets { get; } = [];
+    #endregion
+    //public decimal IncomeGoal { get; set; } = 1500m;
+    
+    #region Monthly Budgets
 
+    public MonthlyBudget GetorCreateBudget(int year, int month)
+    {
+        var existing = MonthlyBudgets.FirstOrDefault(x => x.Year == year && x.Month == month);
+        if (existing != null) return existing;
+        
+        var previous = MonthlyBudgets
+            .Where(x => x.Year * 12 + x.Month < year * 12 + month)
+            .OrderByDescending(x => x.Year * 12 + x.Month)
+            .FirstOrDefault();
+
+        var created = new MonthlyBudget
+        {
+            Year = year,
+            Month = month,
+            IncomeGoal = previous?.IncomeGoal ?? DefaultIncomeGoal
+        };
+        
+        MonthlyBudgets.Add(created);
+        return created;
+    }
+    #endregion
+    
+    #region Save & Load
     internal void Save()
     {
         var data = new AppData
         {
             transactionsTable = Transactions.ToList(),
-            IncomeGoal = IncomeGoal
+            monthlyBudget = MonthlyBudgets
         };
 
         Directory.CreateDirectory(Path.GetDirectoryName(dataFilePath)!);
@@ -33,11 +63,20 @@ public class DataStore
         var data = JsonSerializer.Deserialize<AppData>(File.ReadAllText(dataFilePath));
         if (data == null) return;
         
-        IncomeGoal = data.IncomeGoal;
         Transactions.Clear();
         foreach (var transaction in data.transactionsTable ?? [])
         {
             Transactions.Add(transaction);
         }
+        
+        MonthlyBudgets.Clear();
+        MonthlyBudgets.AddRange(data.monthlyBudget ?? []);
+
+        if (MonthlyBudgets.Count == 0 && data.IncomeGoal > 0)
+        {
+            var today = DateTime.Today;
+            GetorCreateBudget(today.Year, today.Month).IncomeGoal = data.IncomeGoal;
+        }
     }
+    #endregion
 }
