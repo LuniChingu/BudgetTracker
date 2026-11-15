@@ -6,9 +6,6 @@ using BudgetTracker.ViewModels;
 
 namespace BudgetTracker;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
@@ -30,7 +27,7 @@ public partial class App : Application
         }
         
         var mainViewModel = new MainViewModel(new DashboardViewModel(store),
-            new TransactionsViewModel(store));
+            new TransactionsViewModel(store, new DialogService()));
 
         var window = new MainWindow() { DataContext = mainViewModel };
         window.Show();

@@ -7,20 +7,31 @@ namespace BudgetTracker.Converters;
 
 public class CategoryToBrushConverter : IValueConverter
 {
-    private static readonly Brush NeedsBrush   = MakeBrush("#b09bba");
-    private static readonly Brush WantsBrush   = MakeBrush("#a6ad9d");
-    private static readonly Brush SavingsBrush = MakeBrush("#dca28e");
+    private static readonly Dictionary<string, Brush> CategoryBrushes = new()
+    {
+        ["Housing"] = MakeBrush("#788DA5"),
+        ["Transport"] = MakeBrush("#D0B16F"),
+        ["Groceries"] = MakeBrush("#A0AD9A"),
+        ["Essentials"] = MakeBrush("#8DA994"),
+
+        ["Shopping"] = MakeBrush("#C48791"),
+        ["Entertainment"] = MakeBrush("#A99BC9"),
+        ["Travel"] = MakeBrush("#8C9DB8"),
+        ["Electronics"] = MakeBrush("#79A6A3"),
+        ["Miscellaneous"] = MakeBrush("#AC8BA8"),
+
+        ["Savings"] = MakeBrush("#6F9A7D"),
+        ["Emergency"] = MakeBrush("#D0A052"),
+        ["Debt"] = MakeBrush("#B87578"),
+        ["Other"] = MakeBrush("#B98B78"),
+    };
+    
     private static readonly Brush UnknownBrush = MakeBrush("#D5D1CB");
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        var category = value as string ?? "";
-
-        if (Categories.Needs.Contains(category))   return NeedsBrush;
-        if (Categories.Wants.Contains(category))   return WantsBrush;
-        if (Categories.Savings.Contains(category)) return SavingsBrush;
-        return UnknownBrush;
-    }
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+        value is string category && CategoryBrushes.TryGetValue(category, out var brush)
+            ? brush
+            : UnknownBrush;
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         => throw new NotSupportedException();
