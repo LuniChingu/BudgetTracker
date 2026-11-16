@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d"
              d:DesignHeight="*" d:DesignWidth="*"
@@ -49,7 +49,7 @@
                                 VerticalAlignment="Center">
                         <Button Style="{StaticResource MonthNavButtonStyle}"
                                 Command="{Binding PreviousMonthCommand}">
-                            <sharp:IconImage Grid.Row="0" Grid.Column="0" Icon="AngleLeft"
+                            <fa:IconImage Grid.Row="0" Grid.Column="0" Icon="AngleLeft"
                                              Style="{StaticResource NavigationIcon}"/>
                         </Button>
                         <TextBlock Text="{Binding SelectedMonth, StringFormat='MMMM yyyy'}"
@@ -61,7 +61,7 @@
                                    Margin="5"/>
                         <Button Style="{StaticResource MonthNavButtonStyle}"
                                 Command="{Binding NextMonthCommand}">
-                            <sharp:IconImage Grid.Row="0" Grid.Column="0" Icon="AngleRight"
+                            <fa:IconImage Grid.Row="0" Grid.Column="0" Icon="AngleRight"
                                              Style="{StaticResource NavigationIcon}"/>
                         </Button>
                     </StackPanel>
@@ -296,40 +296,41 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="105"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     
-                    <sharp:IconImage Grid.Row="0" Grid.Column="0" Icon="Utensils"
+                    <fa:IconImage Grid.Row="0" Grid.Column="0" Icon="Utensils"
                                      Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="1" Grid.Column="0" Icon="SuitcaseRolling"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="2" Grid.Column="0" Icon="BuildingColumns"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="3" Grid.Column="0" Icon="Gamepad"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="4" Grid.Column="0" Icon="CarSide"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="5" Grid.Column="0" Icon="HouseChimney"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="6" Grid.Column="0" Icon="CartShopping"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="7" Grid.Column="0" Icon="Laptop"
-                                     Style="{StaticResource CategoryIcon}"/>
-                    <sharp:IconImage Grid.Row="8" Grid.Column="0" Icon="Tags"
-                                     Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="1" Grid.Column="0" Icon="SuitcaseRolling"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="2" Grid.Column="0" Icon="BuildingColumns"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="3" Grid.Column="0" Icon="Gamepad"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="4" Grid.Column="0" Icon="CarSide"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="5" Grid.Column="0" Icon="HouseChimney"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="6" Grid.Column="0" Icon="CartShopping"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="7" Grid.Column="0" Icon="Laptop"
+                                  Style="{StaticResource CategoryIcon}"/>
+                    <fa:IconImage Grid.Row="8" Grid.Column="0" Icon="Tags"
+                                  Style="{StaticResource CategoryIcon}"/>
                     
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Takeout"
                                Style="{StaticResource GeneralText}"/>
@@ -350,23 +351,23 @@
                     <TextBlock Grid.Row="8" Grid.Column="1" Text="Misc"
                                Style="{StaticResource GeneralText}"/>
                     
-                    <ProgressBar Grid.Row="0" Grid.Column="2" Value="50" Maximum="100" Margin="0,10,5,6"
+                    <ProgressBar Grid.Row="0" Grid.Column="3" Value="50" Maximum="100" Margin="0,10,5,6"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="1" Grid.Column="2" Value="50" Maximum="100"
+                    <ProgressBar Grid.Row="1" Grid.Column="3" Value="50" Maximum="100"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="2" Grid.Column="2" Value="50" Maximum="100" 
+                    <ProgressBar Grid.Row="2" Grid.Column="3" Value="50" Maximum="100" 
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="3" Grid.Column="2" Value="50" Maximum="100"
+                    <ProgressBar Grid.Row="3" Grid.Column="3" Value="50" Maximum="100"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="4" Grid.Column="2" Value="50" Maximum="100"
+                    <ProgressBar Grid.Row="4" Grid.Column="3" Value="50" Maximum="100"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="5" Grid.Column="2" Value="50" Maximum="100" Minimum="0"
+                    <ProgressBar Grid.Row="5" Grid.Column="3" Value="50" Maximum="100" Minimum="0"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="6" Grid.Column="2" Value="50" Maximum="100"
+                    <ProgressBar Grid.Row="6" Grid.Column="3" Value="50" Maximum="100"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="7" Grid.Column="2" Value="50" Maximum="100"
+                    <ProgressBar Grid.Row="7" Grid.Column="3" Value="50" Maximum="100"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
-                    <ProgressBar Grid.Row="8" Grid.Column="2" Value="50" Maximum="100"
+                    <ProgressBar Grid.Row="8" Grid.Column="3" Value="50" Maximum="100"
                                  Style="{StaticResource RoundedLinearProgressBarStyle}"/>
                 </Grid>
             </Grid>

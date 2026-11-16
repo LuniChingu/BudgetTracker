@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using BudgetTracker.Services;
@@ -124,6 +125,10 @@ public partial class DashboardViewModel : ObservableObject
     public decimal TotalPercent => NeedsPercent + WantsPercent + SavingsPercent;
 
     private decimal Percent(decimal actual) => IncomeActual == 0 ? 0 : actual / IncomeActual;
+    #endregion
+    
+    #region Progress Bars
+    //public ObservableCollection<CategorySpending> CategorySummaries { get; } = new CategorySummaries();
     #endregion
 
     #region Pie chart

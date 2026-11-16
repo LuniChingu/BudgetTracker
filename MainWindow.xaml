@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sharp="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:vm="clr-namespace:BudgetTracker.ViewModels"
         xmlns:views="clr-namespace:BudgetTracker.Views"
         mc:Ignorable="d"
@@ -53,14 +53,14 @@
                 <Button x:Name="btnClose" 
                         Style="{StaticResource UpperBarBtn}"
                         Click="btnClose_Click">
-                    <sharp:IconImage Icon="Xmark"
+                    <fa:IconImage Icon="Xmark"
                                      Foreground="AliceBlue"
                                      Style="{StaticResource BarButtonIcon}"/>
                 </Button>
                 <Button x:Name="btnMinimize" 
                         Style="{StaticResource UpperBarBtn}"
                         Click="btnMinimize_Click">
-                    <sharp:IconImage Icon="WindowMinimize"
+                    <fa:IconImage Icon="WindowMinimize"
                                      Foreground="AliceBlue"
                                      IconFont="Solid"
                                      Width="12"
@@ -92,7 +92,7 @@
                                  IsChecked="True"
                                  Command="{Binding ShowDashboardCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <sharp:IconImage Icon="House"
+                            <fa:IconImage Icon="House"
                                              Foreground="#F5F1EA"
                                              Width="22"
                                              Height="22"
@@ -108,7 +108,7 @@
                                  GroupName="MenuNav"
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
-                            <sharp:IconImage Icon="Chain"
+                            <fa:IconImage Icon="Chain"
                                              Foreground="#F5F1EA"
                                              Width="22"
                                              Height="22"
@@ -125,7 +125,7 @@
                                  Command="{Binding ShowTransactionsCommand}"
                                  FontFamily="Resources/Fonts/#Geom">
                         <StackPanel Orientation="Horizontal">
-                            <sharp:IconImage Icon="ArrowRightArrowLeft"
+                            <fa:IconImage Icon="ArrowRightArrowLeft"
                                              Foreground="#F5F1EA"
                                              Width="22"
                                              Height="22"
@@ -167,7 +167,7 @@
                                        Style="{StaticResource MonthTitle}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <sharp:IconImage Icon="Wallet"
+                            <fa:IconImage Icon="Wallet"
                                              Foreground="CornflowerBlue"
                                              Width="28"
                                              Height="28"
