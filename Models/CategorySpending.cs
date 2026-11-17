@@ -7,5 +7,5 @@ public class CategorySpending
     public double Share { get; set; }
 
     public double Percentage => Share * 100;
-    public double BarValue => Percentage > 0 ? Math.Max(Percentage, 2) : 0;
+    public double BarValue => Percentage > 0 ? Math.Max(Percentage, 3) : 0;
 }

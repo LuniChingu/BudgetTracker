@@ -114,8 +114,7 @@
     
     <!--Progress Bar -->
     <Style x:Key="RoundedLinearProgressBarStyle" TargetType="ProgressBar">
-        <Setter Property="Foreground" Value="Navy"/>
-        <Setter Property="Background" Value="Pink"/>
+        <Setter Property="Background" Value="#D5D1CB"/>
         <Setter Property="Height" Value="9"/>
         <Setter Property="Margin" Value="0,8, 5, 9"/>
         <Setter Property="IsIndeterminate" Value="False"/>

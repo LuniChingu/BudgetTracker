@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Documents;
 using BudgetTracker.Services;
 using BudgetTracker.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -84,6 +85,7 @@ public partial class DashboardViewModel : ObservableObject
         if (_isLoading) return;
         _currentBudget.IncomeActual = value;
         _store.Save();
+        Recalculate();
     }
     #endregion
 
@@ -128,7 +130,7 @@ public partial class DashboardViewModel : ObservableObject
     #endregion
     
     #region Progress Bars
-    //public ObservableCollection<CategorySpending> CategorySummaries { get; } = new CategorySummaries();
+    public ObservableCollection<CategorySpending> CategorySummaries { get; } = new();
     #endregion
 
     #region Pie chart
@@ -181,6 +183,23 @@ public partial class DashboardViewModel : ObservableObject
         WantsActual   = month.Where(t => Categories.Wants.Contains(t.Category)).Sum(t => t.Amount);
         SavingsActual = month.Where(t => Categories.Savings.Contains(t.Category)).Sum(t => t.Amount);
 
+        CategorySummaries.Clear();
+
+        var cards = new List<CategorySpending>();
+
+        foreach (var name in Categories.All)
+        {
+            var categoryAmount =month.Where(t => t.Category == name).Sum(t => t.Amount);
+            var share = IncomeActual == 0 ? 0 : (double)(categoryAmount / IncomeActual);
+            
+            cards.Add(new CategorySpending(){Name = name, Amount = categoryAmount, Share = share});
+        }
+
+        foreach (var card in cards.OrderByDescending(c => c.Amount))
+        {
+            CategorySummaries.Add(card);
+        }
+
         BudgetTrendSeries =
         [
             MakeSlice("Needs", NeedsActual, "#b09bba"),
@@ -211,15 +230,4 @@ public partial class DashboardViewModel : ObservableObject
     }
 
     private void OnTransactionEdited(object? sender, PropertyChangedEventArgs e) => Recalculate();
-    
-    
-    //partial void OnSelectedMonthChanged(DateTime value) => Recalculate();
-
-    //partial void OnIncomeGoalChanged(decimal value)
-    //{
-    //    _store.IncomeGoal = value;
-    //    _store.Save();
-    //}
-
-    
 }
