@@ -15,5 +15,7 @@ public partial class Transaction : ObservableObject
 
     [ObservableProperty]
     public partial string? Category { get; set; }
+    
+    public Guid? CommitmentId { get; set; }
     //public string? Currency { get; set; }
 }

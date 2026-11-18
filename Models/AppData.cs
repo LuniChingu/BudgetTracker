@@ -4,6 +4,7 @@ public class AppData
 {
     public List<Transaction>? transactionsTable { get; set; }
     public List<MonthlyBudget>? monthlyBudget { get; set; }
+    public List<Commitment>? commitments { get; set; } = new();
     public decimal IncomeGoal {get; set;}
     //public decimal NeedsGoal { get; set; }
     //public decimal WantsGoal {get; set;}

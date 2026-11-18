@@ -273,7 +273,8 @@
             </Grid>
             </Grid>
         </Border>
-        <!-- Category view tentative -->
+        
+        <!-- view by category -->
         <Border Grid.Row="0" Grid.Column="1"
                 Background="#E8E2DC"
                 CornerRadius="10"

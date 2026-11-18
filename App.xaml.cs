@@ -27,7 +27,7 @@ public partial class App : Application
         }
         
         var mainViewModel = new MainViewModel(new DashboardViewModel(store),
-            new TransactionsViewModel(store, new DialogService()));
+            new TransactionsViewModel(store, new DialogService()), new CommitmentsViewModel(store));
 
         var window = new MainWindow() { DataContext = mainViewModel };
         window.Show();

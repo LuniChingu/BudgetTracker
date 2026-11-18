@@ -19,6 +19,9 @@
         <DataTemplate DataType="{x:Type vm:TransactionsViewModel}">
             <views:TransactionsView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CommitmentsViewModel}">
+            <views:CommitmentsView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Border Background="#393647"
@@ -106,7 +109,8 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource SideMenuRadioButton}"
                                  GroupName="MenuNav"
-                                 FontFamily="Resources/Fonts/#Geom">
+                                 FontFamily="Resources/Fonts/#Geom"
+                                 Command="{Binding ShowCommitmentsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Chain"
                                              Foreground="#F5F1EA"

@@ -3,17 +3,269 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:BudgetTracker.Views"
+             xmlns:viewModels="clr-namespace:BudgetTracker.ViewModels"
+             xmlns:models="clr-namespace:BudgetTracker.Models"
              mc:Ignorable="d"
-             d:DesignHeight="1000" d:DesignWidth="1000"
-             Background="#1f1f24">
+             d:DesignHeight="780" d:DesignWidth="1200"
+             Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="850"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         
+        <Border Grid.Column="0" Grid.Row="0"
+                Background="#E8E2DC"
+                CornerRadius="10"
+                Margin="10, 10, 5, 10"
+                Padding="15"
+                VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Summary"
+                           FontFamily="Resources/Fonts/#Geom"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           Foreground="#31223d"
+                           VerticalAlignment="Bottom"
+                           Margin="0,0,0,8"/>
+                
+                <Border Grid.Row="1" Grid.Column="0"
+                        Height="80" Background="#afa7cc" 
+                        Margin="0,10,5,0"
+                        Padding="10"
+                        CornerRadius="12">
+                    <StackPanel>
+                        <TextBlock Text="Fixed"/>
+                        <TextBlock Text="5,000" HorizontalAlignment="Center"
+                                   FontSize="20" FontWeight="DemiBold"/>
+                        <TextBlock Text="8 commitments" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1"
+                        Height="80" Background="#a3b5a7"
+                        Margin="5,10,5,0"
+                        Padding="10"
+                        CornerRadius="12">
+                    <StackPanel>
+                        <TextBlock Text="Variable"/>
+                        <TextBlock Text="5,000" HorizontalAlignment="Center"
+                                   FontSize="20" FontWeight="DemiBold"/>
+                        <TextBlock Text="8 commitments" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2"
+                        Height="80" Background="#d4a692"
+                        Margin="5,10,0,0"
+                        Padding="10"
+                        CornerRadius="12">
+                    <StackPanel>
+                        <TextBlock Text="Due this month"/>
+                        <TextBlock Text="5,000" HorizontalAlignment="Center"
+                                   FontSize="20" FontWeight="DemiBold"/>
+                        <TextBlock Text="8 commitments" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <Border Grid.Row="1" Grid.Column="0"
+                Background="#E8E2DC"
+                CornerRadius="10"
+                Margin="10, 0, 5, 10"
+                Padding="15"
+                Height="400"
+                VerticalAlignment="Top">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Commitments"
+                           FontFamily="Resources/Fonts/#Geom"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           Foreground="#31223d"
+                           VerticalAlignment="Bottom"
+                           Margin="0,0,0,8"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="+ Add"
+                        Command="{Binding AddCommitmentCommand}"/>
+                
+                <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                         ItemsSource="{Binding Commitments}"
+                         DisplayMemberPath="Name"/>
+            </Grid>
+            
+        </Border>
+        
+        <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+                Background="#E8E2DC"
+                CornerRadius="10"
+                Margin="5, 10, 10, 15"
+                Padding="15, 15, 15, 5"
+                VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                        
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Upcoming"
+                           FontFamily="Resources/Fonts/#Geom"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           Foreground="#31223d"
+                           VerticalAlignment="Bottom"
+                           Margin="0,0,0,8"/>
+                
+                <ItemsControl Grid.Row="1">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <Border Background="CadetBlue"
+                            Padding="10" CornerRadius="15" Margin="0,10,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                                    
+                            <TextBlock Grid.Row="0" Text="15 Nov" FontSize="14" FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <fa:IconImage  Icon="Gamepad" Height="12" Margin="2, 5, 5, 2" VerticalAlignment="center"></fa:IconImage>
+                            <TextBlock Text="Netflix" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="Automatic"/>
+                            <TextBlock Grid.Row="3" Text="50.00$" HorizontalAlignment="Right" FontSize="20"/>
+                        </Grid>
+                    </Border>
+                    <Border Background="CadetBlue"
+                            Padding="10" CornerRadius="15" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                                    
+                            <TextBlock Grid.Row="0" Text="15 Nov" FontSize="14" FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <fa:IconImage  Icon="HouseChimney" Height="14" Margin="2, 5, 5, 2" VerticalAlignment="center"></fa:IconImage>
+                                <TextBlock Text="Rent" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="Mark Paid"/>
+                            <TextBlock Grid.Row="3" Text="300.00$" HorizontalAlignment="Right" FontSize="20"/>
+                        </Grid>
+                    </Border>
+                    <Border Background="CadetBlue"
+                            Padding="10" CornerRadius="15" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                                    
+                            <TextBlock Grid.Row="0" Text="15 Nov" FontSize="14" FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <fa:IconImage  Icon="HouseChimney" Height="14" Margin="2, 5, 5, 2" VerticalAlignment="center"></fa:IconImage>
+                                <TextBlock Text="Rent" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="Mark Paid"/>
+                            <TextBlock Grid.Row="3" Text="300.00$" HorizontalAlignment="Right" FontSize="20"/>
+                        </Grid>
+                    </Border>
+                    <Border Background="CadetBlue"
+                            Padding="10" CornerRadius="15" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                                    
+                            <TextBlock Grid.Row="0" Text="15 Nov" FontSize="14" FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <fa:IconImage  Icon="HouseChimney" Height="14" Margin="2, 5, 5, 2" VerticalAlignment="center"></fa:IconImage>
+                                <TextBlock Text="Rent" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="Mark Paid"/>
+                            <TextBlock Grid.Row="3" Text="300.00$" HorizontalAlignment="Right" FontSize="20"/>
+                        </Grid>
+                    </Border>
+                    <Border Background="CadetBlue"
+                            Padding="10" CornerRadius="15" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                                    
+                            <TextBlock Grid.Row="0" Text="15 Nov" FontSize="14" FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <fa:IconImage  Icon="HouseChimney" Height="14" Margin="2, 5, 5, 2" VerticalAlignment="center"></fa:IconImage>
+                                <TextBlock Text="Rent" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="Mark Paid"/>
+                            <TextBlock Grid.Row="3" Text="300.00$" HorizontalAlignment="Right" FontSize="20"/>
+                        </Grid>
+                    </Border>
+                    <Border Background="CadetBlue"
+                            Padding="10" CornerRadius="15" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                                    
+                            <TextBlock Grid.Row="0" Text="15 Nov" FontSize="14" FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <fa:IconImage  Icon="HouseChimney" Height="14" Margin="2, 5, 5, 2" VerticalAlignment="center"></fa:IconImage>
+                                <TextBlock Text="Rent" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="Mark Paid"/>
+                            <TextBlock Grid.Row="3" Text="300.00$" HorizontalAlignment="Right" FontSize="20"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

@@ -16,6 +16,7 @@ public class DataStore
     #region Data
     public ObservableCollection<Transaction> Transactions { get; } = [];
     public List<MonthlyBudget>  MonthlyBudgets { get; } = [];
+    public ObservableCollection<Commitment> Commitments { get; } = [];
     #endregion
     //public decimal IncomeGoal { get; set; } = 1500m;
     
@@ -49,7 +50,8 @@ public class DataStore
         var data = new AppData
         {
             transactionsTable = Transactions.ToList(),
-            monthlyBudget = MonthlyBudgets
+            monthlyBudget = MonthlyBudgets,
+            commitments = Commitments.ToList()
         };
 
         Directory.CreateDirectory(Path.GetDirectoryName(dataFilePath)!);
@@ -67,6 +69,12 @@ public class DataStore
         foreach (var transaction in data.transactionsTable ?? [])
         {
             Transactions.Add(transaction);
+        }
+        
+        Commitments.Clear();
+        foreach (var commitment in data.commitments ?? [])
+        {
+            Commitments.Add(commitment);
         }
         
         MonthlyBudgets.Clear();
